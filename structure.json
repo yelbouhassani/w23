@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "title": "string",
+    "description": "string", 
+    "extracted_date": "string",
+    "total_topics": "number"
+  },
+  "topics": [
+    {
+      "id": "string",
+      "label": "string", 
+      "points": "number",
+      "reference_style": "string"
+    }
+  ],
+  "exercises": {
+    "topic_id": [
+      {
+        "id": "number",
+        "points": "number",
+        "criteria": [
+          {
+            "label": "string",
+            "points": "number"
+          }
+        ],
+        "question": "string",
+        "answer": "string"
+      }
+    ]
+  }
+}
