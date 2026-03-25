@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiskunde Oefeningen Viewer</title>
+    
+    <!-- MathJax voor LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Data bestand -->
+    <script src="wiskunde_data.js"></script>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: #4a5568;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .topics-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .topic-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .topic-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-points {
+            color: #718096;
+            font-weight: bold;
+        }
+
+        .navigation {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            color: #4a5568;
+        }
+
+        .nav-btn:hover {
+            background: #cbd5e0;
+        }
+
+        .nav-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .topic-section {
+            background: white;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .exercise {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            background: #fafafa;
+        }
+
+        .exercise-header {
+            background: #667eea;
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .exercise-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .exercise-points {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .exercise-content {
+            padding: 1.5rem;
+        }
+
+        .criteria {
+            background: #f7fafc;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            border-left: 3px solid #48bb78;
+        }
+
+        .criteria h4 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .criteria-list {
+            list-style: none;
+        }
+
+        .criteria-item {
+            padding: 0.25rem 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .criteria-points {
+            color: #48bb78;
+            font-weight: bold;
+        }
+
+        .question, .answer {
+            margin-bottom: 1.5rem;
+        }
+
+        .question h4 {
+            color: #e53e3e;
+            margin-bottom: 0.75rem;
+        }
+
+        .answer h4 {
+            color: #38a169;
+            margin-bottom: 0.75rem;
+        }
+
+        .question-content, .answer-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            border-left: 4px solid #e53e3e;
+        }
+
+        .answer-content {
+            border-left-color: #38a169;
+        }
+
+        .reference {
+            background: #fffaf0;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .reference h4 {
+            color: #c05621;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .back-to-top:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: #718096;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+            
+            .exercise-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Wiskunde Oefeningen</h1>
+            <p>Interactieve viewer voor wiskundige opgaven met LaTeX-ondersteuning</p>
+        </header>
+
+        <div id="loading" class="loading">
+            Laden van oefeningen...
+        </div>
+
+        <div id="content" style="display: none;">
+            <div class="navigation">
+                <h3>Navigatie</h3>
+                <div class="nav-buttons" id="navigation">
+                    <!-- Wordt gevuld door JavaScript -->
+                </div>
+            </div>
+
+            <div id="topics-overview"></div>
+            <div id="exercises-content"></div>
+        </div>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()" title="Terug naar boven">↑</button>
+
+    <script>
+        let data = null;
+
+        // JSON data direct embedded (plak hier je JSON data)
+        const EMBEDDED_DATA = null; // Vervang null met je JSON data
+
+        // Laad de JSON data
+        async function loadData() {
+            // Probeer eerst data vanuit JavaScript bestand
+            if (typeof PREDEFINED_CONTENT !== 'undefined') {
+                data = PREDEFINED_CONTENT;
+                renderPage();
+                return;
+            }
+
+            // Anders probeer external JSON file
+            try {
+                const response = await fetch('predefined_content.json');
+                data = await response.json();
+                renderPage();
+            } catch (error) {
+                showDataInput();
+            }
+        }
+
+        // Toon data input interface
+        function showDataInput() {
+            document.getElementById('loading').innerHTML = `
+                <div>
+                    <h3>JSON Data Laden</h3>
+                    <p>Plak hier de inhoud van je predefined_content.json bestand:</p>
+                    <textarea id="jsonInput" style="width: 100%; height: 200px; margin: 10px 0;" 
+                              placeholder="Plak hier je JSON data..."></textarea>
+                    <button onclick="loadFromInput()" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        Laad Data
+                    </button>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                        Of kopieer de JSON data direct naar de EMBEDDED_DATA variabele in de HTML code voor permanente opslag.
+                    </p>
+                </div>
+            `;
+        }
+
+        // Laad data vanuit textarea input
+        function loadFromInput() {
+            const input = document.getElementById('jsonInput').value.trim();
+            if (!input) {
+                alert('Voer eerst JSON data in!');
+                return;
+            }
+
+            try {
+                data = JSON.parse(input);
+                renderPage();
+            } catch (error) {
+                alert('Ongeldige JSON data. Controleer de syntax.');
+            }
+        }
+
+        // Render de volledige pagina
+        function renderPage() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            
+            renderNavigation();
+            renderTopicsOverview();
+            renderAllExercises();
+            
+            // MathJax opnieuw laden voor de nieuwe content
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Render navigatie
+        function renderNavigation() {
+            const nav = document.getElementById('navigation');
+            let navHTML = '<a href="#overview" class="nav-btn" onclick="scrollToElement(\'topics-overview\')">Overzicht</a>';
+            
+            data.TOPICS.forEach(topic => {
+                navHTML += `<a href="#${topic.id}" class="nav-btn" onclick="scrollToElement('${topic.id}')">${topic.label}</a>`;
+            });
+            
+            nav.innerHTML = navHTML;
+        }
+
+        // Render topics overzicht
+        function renderTopicsOverview() {
+            const overview = document.getElementById('topics-overview');
+            let html = '<h2 id="overview">Onderwerpen Overzicht</h2><div class="topics-overview">';
+            
+            data.TOPICS.forEach(topic => {
+                const exerciseCount = data.PREDEFINED[topic.id] ? data.PREDEFINED[topic.id].length : 0;
+                html += `
+                    <div class="topic-card">
+                        <h3>${topic.label}</h3>
+                        <p class="topic-points">${topic.points} punten</p>
+                        <p>${exerciseCount} oefening(en) beschikbaar</p>
+                        <div class="reference">
+                            <h4>Referentie:</h4>
+                            <p>${data.REFERENCE[topic.id] || 'Geen referentie beschikbaar'}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            overview.innerHTML = html;
+        }
+
+        // Render alle oefeningen
+        function renderAllExercises() {
+            const content = document.getElementById('exercises-content');
+            let html = '';
+            
+            data.TOPICS.forEach(topic => {
+                const exercises = data.PREDEFINED[topic.id] || [];
+                if (exercises.length === 0) return;
+                
+                html += `
+                    <div class="topic-section" id="${topic.id}">
+                        <h2>${topic.label} (${topic.points} punten)</h2>
+                        <div class="reference">
+                            <h4>Referentie-aanpak:</h4>
+                            <p>${data.REFERENCE[topic.id]}</p>
+                        </div>
+                `;
+                
+                exercises.forEach((exercise, index) => {
+                    html += `
+                        <div class="exercise">
+                            <div class="exercise-header">
+                                <span class="exercise-title">Opgave ${index + 1}</span>
+                                <span class="exercise-points">${exercise.points} punten</span>
+                            </div>
+                            <div class="exercise-content">
+                                <div class="criteria">
+                                    <h4>Beoordelingscriteria:</h4>
+                                    <ul class="criteria-list">
+                                        ${exercise.criteria.map(criterion => 
+                                            `<li class="criteria-item">
+                                                <span>${criterion.label}</span>
+                                                <span class="criteria-points">${criterion.points}p</span>
+                                            </li>`
+                                        ).join('')}
+                                    </ul>
+                                </div>
+                                
+                                <div class="question">
+                                    <h4>📝 Vraag:</h4>
+                                    <div class="question-content">${formatContent(exercise.question)}</div>
+                                </div>
+                                
+                                <div class="answer">
+                                    <h4>✅ Oplossing:</h4>
+                                    <div class="answer-content">${formatContent(exercise.answer)}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+            });
+            
+            content.innerHTML = html;
+        }
+
+        // Format content met behoud van LaTeX en markdown
+        function formatContent(content) {
+            // Vervang markdown headers
+            content = content.replace(/##\s+(.*)/g, '<h3>$1</h3>');
+            
+            // Vervang **bold** tekst
+            content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Vervang nieuwe regels met <br> waar nodig
+            content = content.replace(/\n\n/g, '</p><p>');
+            content = content.replace(/\n/g, '<br>');
+            
+            // Wrap in paragraaf als het er nog niet is
+            if (!content.startsWith('<')) {
+                content = '<p>' + content + '</p>';
+            }
+            
+            return content;
+        }
+
+        // Scroll functies
+        function scrollToElement(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Highlight actieve navigatie
+        function updateActiveNavigation() {
+            const sections = data.TOPICS.map(topic => document.getElementById(topic.id)).filter(el => el);
+            const navButtons = document.querySelectorAll('.nav-btn');
+            
+            let activeSection = null;
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                if (section.offsetTop <= scrollPos) {
+                    activeSection = section.id;
+                }
+            });
+            
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick').includes(activeSection)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', updateActiveNavigation);
+        window.addEventListener('load', loadData);
+    </script>
+</body>
+</html>

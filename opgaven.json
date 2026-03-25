@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "title": "Fourier Transformaties – Opgaven Varianten",
+    "description": "Variantopgaven gebaseerd op het tentamen Fourier Transformaties (2300WISK23). Elk onderwerp bevat één nieuwe opgave die qua onderwerp en opbouw overeenkomt met de originele opgaven maar andere getallen / functies gebruikt. Puntenverdeling is identiek.",
+    "extracted_date": "2026-03-23",
+    "total_topics": 10
+  },
+  "topics": [
+    { "id": "taylor",        "label": "Taylor",           "points": 15, "reference_style": "Oefententamen / Tentamen / Hertentamen" },
+    { "id": "fourier_serie", "label": "Fourier Serie",    "points": 14, "reference_style": "Oefententamen / Tentamen / Hertentamen" },
+    { "id": "fl_regels",     "label": "F/L Trans regels", "points": 7,  "reference_style": "Oefententamen / Tentamen / Hertentamen" },
+    { "id": "fl_uitvoeren",  "label": "F/L uitvoeren",    "points": 16, "reference_style": "Oefententamen / Tentamen / Hertentamen" },
+    { "id": "conv_via_f",    "label": "conv via F",       "points": 9,  "reference_style": "Oefententamen / Tentamen / Hertentamen" },
+    { "id": "fft_stelling",  "label": "FFT stelling",     "points": 7,  "reference_style": "Oefententamen / Tentamen / Hertentamen" },
+    { "id": "filter",        "label": "filter",           "points": 5,  "reference_style": "Oefententamen / Tentamen / Hertentamen" },
+    { "id": "fft_code",      "label": "FFT code",         "points": 7,  "reference_style": "Oefententamen / Tentamen / Hertentamen" },
+    { "id": "dv_fl",         "label": "DV F/L",           "points": 10, "reference_style": "Oefententamen / Tentamen / Hertentamen" },
+    { "id": "dv_powerserie", "label": "DV powerserie",    "points": 10, "reference_style": "Oefententamen / Tentamen / Hertentamen" }
+  ],
+  "exercises": {
+    "taylor": [
+      {
+        "id": 1,
+        "points": 15,
+        "variant": "Variant A",
+        "criteria": [
+          {
+            "label": "(a) Taylorserie van f(x) = 1/√(1−x²) tot en met de tweede macht van x",
+            "points": 10
+          },
+          {
+            "label": "(b) Toepassen van de serie om arcsin(0,1) te benaderen",
+            "points": 5
+          }
+        ],
+        "question": "In de analyse van cirkelbewegingen en in de statistiek speelt de arcsinus-functie een belangrijke rol. Deze functie kan worden uitgedrukt als de volgende integraal:\n\n  arcsin(x) = ∫₀ˣ  1/√(1−t²)  dt\n\n(a) (10p) Vind een benaderende Taylorserie, tot en met de tweede macht van x, rond het punt x = 0 van de volgende functie:\n\n  f(x) = 1/√(1−x²) = (1−x²)^(−½)\n\n(b) (5p) Gebruik je resultaat van (a) om arcsin(0,1) te benaderen.\n(Gebruik f(x) ≈ 1 + ½x² indien je niet uit de vorige vraag bent gekomen.)",
+        "answer": {
+          "part_a": {
+            "description": "Bepaal f(0), f'(0) en f''(0) via differentiëren, stel vervolgens de Taylorontwikkeling op.",
+            "steps": [
+              {
+                "step": 1,
+                "description": "Functiewaarde in x = 0",
+                "calculation": "f(x) = (1−x²)^(−½)\nf(0) = (1−0)^(−½) = 1"
+              },
+              {
+                "step": 2,
+                "description": "Eerste afgeleide via kettingregel",
+                "calculation": "f'(x) = d/dx (1−x²)^(−½)\n       = (−½)(1−x²)^(−3/2) · (−2x)\n       = x · (1−x²)^(−3/2)\nf'(0) = 0 · 1 = 0"
+              },
+              {
+                "step": 3,
+                "description": "Tweede afgeleide via productregel",
+                "calculation": "f''(x) = d/dx [ x · (1−x²)^(−3/2) ]\n       = (1−x²)^(−3/2)  +  x · (−3/2)(1−x²)^(−5/2)(−2x)\n       = (1−x²)^(−3/2)  +  3x² · (1−x²)^(−5/2)\nf''(0) = 1 + 0 = 1"
+              },
+              {
+                "step": 4,
+                "description": "Taylorserie tot en met de tweede macht",
+                "calculation": "f(x) ≈ f(0) + f'(0)·x + f''(0)/2! · x²\n      = 1   +   0·x   +   1/2 · x²\n      = 1 + ½x²"
+              }
+            ],
+            "result": "f(x) ≈ 1 + ½x²  (geldig voor kleine |x|)"
+          },
+          "part_b": {
+            "description": "Integreer de benaderende serie van (a) over [0, 0,1] om arcsin(0,1) te schatten.",
+            "steps": [
+              {
+                "step": 1,
+                "description": "Schrijf de integraal met de benaderende integrand",
+                "calculation": "arcsin(0,1) = ∫₀^0.1  1/√(1−t²)  dt\n            ≈ ∫₀^0.1  (1 + ½t²)  dt"
+              },
+              {
+                "step": 2,
+                "description": "Voer de integratie term voor term uit",
+                "calculation": "∫₀^0.1 (1 + ½t²) dt = [ t + t³/6 ]₀^0.1\n                    = 0,1 + (0,1)³/6\n                    = 0,1 + 0,001/6\n                    = 0,1 + 0,0001667..."
+              },
+              {
+                "step": 3,
+                "description": "Geef het eindresultaat",
+                "calculation": "arcsin(0,1) ≈ 0,10017"
+              },
+              {
+                "step": 4,
+                "description": "Verificatie (ter informatie, niet vereist)",
+                "calculation": "Exacte waarde: arcsin(0,1) = 0,100167... ✓  (fout < 0,0001)"
+              }
+            ],
+            "result": "arcsin(0,1) ≈ 0,10017"
+          }
+        }
+      }
+    ]
+  }
+}

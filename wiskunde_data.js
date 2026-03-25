@@ -1,0 +1,1126 @@
+const PREDEFINED_CONTENT = 
+{
+  "TOPICS": [
+    {
+      "id": "taylor",
+      "label": "Taylorreeksen",
+      "points": 15
+    },
+    {
+      "id": "fourier_normal",
+      "label": "Gewone Fourierreeks",
+      "points": 14
+    },
+    {
+      "id": "fourier_complex",
+      "label": "Complexe Fourierreeks",
+      "points": 14
+    },
+    {
+      "id": "fourier_transform",
+      "label": "Fouriertransformatie",
+      "points": 16
+    },
+    {
+      "id": "inverse_fourier",
+      "label": "Inverse Fouriertransformatie",
+      "points": 7
+    },
+    {
+      "id": "convolutie",
+      "label": "Convolutie",
+      "points": 9
+    },
+    {
+      "id": "filters",
+      "label": "Filters",
+      "points": 5
+    },
+    {
+      "id": "laplace",
+      "label": "Laplacetransformatie",
+      "points": 16
+    },
+    {
+      "id": "pde",
+      "label": "PDV's oplossen",
+      "points": 10
+    },
+    {
+      "id": "machtreeks",
+      "label": "Machtreeksen / GDV",
+      "points": 10
+    },
+    {
+      "id": "python_fft",
+      "label": "Python & FFT",
+      "points": 7
+    },
+    {
+      "id": "conceptueel_dtft_dft_fft",
+      "label": "Conceptuele vragen DTFT/DFT/FFT",
+      "points": 8
+    }
+  ],
+  "PREDEFINED": {
+    "taylor": [
+      {
+        "points": 15,
+        "criteria": [
+          {
+            "label": "Inzicht om bekende reeks van sin(u) te gebruiken",
+            "points": 2
+          },
+          {
+            "label": "Bekende reeks van sin(u) correct opgeschreven",
+            "points": 2
+          },
+          {
+            "label": "Substitutie u = x² correct uitvoeren",
+            "points": 4
+          },
+          {
+            "label": "Stoppen bij de juiste term x⁶",
+            "points": 2
+          },
+          {
+            "label": "Integratie term voor term correct",
+            "points": 5
+          }
+        ],
+        "question": "## Taylorreeks van $f(x) = \\sin(x^2)$\n\nBeschouw de functie $f(x) = \\sin(x^2)$.\n\n**(a)** Bepaal de Taylorreeks rond $x = 0$ van $\\sin(x^2)$. Geef de eerste 4 niet-nul termen. (8p)\n\n**(b)** Bepaal de onbepaalde integraal $\\int \\sin(x^2) \\, dx$ door term-voor-term integratie van de Taylorreeks. Geef de eerste 4 termen van het resultaat. (7p)",
+        "answer": "## Oplossing\n\n**(a)** Taylorreeks van $\\sin(x^2)$\n\n**Aanpak**: We gebruiken de bekende Taylorreeks van $\\sin(u)$ en substitueren $u = x^2$.\n\n*Opmerking: Als je de standaard reeks van sin(u) niet uit je hoofd kent, kun je deze afleiden via herhaalde differentiatie en de Taylor formule.*\n\nDe bekende Taylorreeks van $\\sin(u)$ rond $u = 0$ is:\n$$\\sin(u) = u - \\frac{u^3}{3!} + \\frac{u^5}{5!} - \\frac{u^7}{7!} + \\cdots = \\sum_{n=0}^{\\infty} \\frac{(-1)^n u^{2n+1}}{(2n+1)!}$$\n\nDoor substitutie van $u = x^2$:\n$$\\sin(x^2) = x^2 - \\frac{(x^2)^3}{3!} + \\frac{(x^2)^5}{5!} - \\frac{(x^2)^7}{7!} + \\cdots$$\n\n$$= x^2 - \\frac{x^6}{6} + \\frac{x^{10}}{120} - \\frac{x^{14}}{5040} + \\cdots$$\n\nDe eerste 4 niet-nul termen zijn: $x^2 - \\frac{x^6}{6} + \\frac{x^{10}}{120} - \\frac{x^{14}}{5040}$\n\n**(b)** Onbepaalde integraal via term-voor-term integratie\n\nIntegreer de Taylorreeks uit (a) term voor term:\n$$\\int \\sin(x^2) \\, dx = \\int \\left(x^2 - \\frac{x^6}{6} + \\frac{x^{10}}{120} - \\frac{x^{14}}{5040} + \\cdots\\right) dx$$\n\n$$= \\frac{x^3}{3} - \\frac{x^7}{42} + \\frac{x^{11}}{1320} - \\frac{x^{15}}{75600} + \\cdots + C$$\n\nwaar $C$ de integratieconstante is.\n\nDe primitieve functie is:\n$$F(x) = \\frac{x^3}{3} - \\frac{x^7}{42} + \\frac{x^{11}}{1320} - \\frac{x^{15}}{75600} + \\cdots + C$$"
+      },
+      {
+        "points": 15,
+        "criteria": [
+          {
+            "label": "Inzicht om bekende reeks van e^u te gebruiken",
+            "points": 2
+          },
+          {
+            "label": "Bekende reeks van e^u correct opgeschreven",
+            "points": 2
+          },
+          {
+            "label": "Substitutie u = -2x correct uitvoeren",
+            "points": 4
+          },
+          {
+            "label": "Stoppen bij de juiste term x^4",
+            "points": 2
+          },
+          {
+            "label": "Functiewaarde f(0.1) correct berekend",
+            "points": 5
+          }
+        ],
+        "question": "## Taylorreeks van $f(x) = e^{-2x}$\n\nBeschouw de functie $f(x) = e^{-2x}$.\n\n**(a)** Bepaal de Taylorreeks rond $x = 0$ van $e^{-2x}$. Geef de eerste 5 termen. (8p)\n\n**(b)** Gebruik de Taylorreeks uit (a) om $f(0.1) = e^{-0.2}$ te benaderen. Geef het antwoord op 5 decimalen nauwkeurig. (7p)",
+        "answer": "## Oplossing\n\n**(a)** Taylorreeks van $e^{-2x}$\n\n**Aanpak**: We gebruiken de bekende Taylorreeks van $e^u$ en substitueren $u = -2x$.\n\n*Opmerking: Als je de standaard reeks van $e^u$ niet uit je hoofd kent, kun je deze afleiden via herhaalde differentiatie en de Taylor formule.*\n\nDe bekende Taylorreeks van $e^u$ rond $u = 0$ is:\n$$e^u = 1 + u + \\frac{u^2}{2!} + \\frac{u^3}{3!} + \\frac{u^4}{4!} + \\cdots = \\sum_{n=0}^{\\infty} \\frac{u^n}{n!}$$\n\nDoor substitutie van $u = -2x$:\n$$e^{-2x} = 1 + (-2x) + \\frac{(-2x)^2}{2!} + \\frac{(-2x)^3}{3!} + \\frac{(-2x)^4}{4!} + \\cdots$$\n\n$$= 1 - 2x + \\frac{4x^2}{2} + \\frac{-8x^3}{6} + \\frac{16x^4}{24} + \\cdots$$\n\n$$= 1 - 2x + 2x^2 - \\frac{4x^3}{3} + \\frac{2x^4}{3} + \\cdots$$\n\nDe eerste 5 termen zijn: $1 - 2x + 2x^2 - \\frac{4x^3}{3} + \\frac{2x^4}{3}$\n\n**(b)** Functiewaarde berekenen\n\nVoor $x = 0.1$:\n$$f(0.1) \\approx 1 - 2(0.1) + 2(0.1)^2 - \\frac{4(0.1)^3}{3} + \\frac{2(0.1)^4}{3}$$\n\n$$= 1 - 0.2 + 2(0.01) - \\frac{4(0.001)}{3} + \\frac{2(0.0001)}{3}$$\n\n$$= 1 - 0.2 + 0.02 - \\frac{0.004}{3} + \\frac{0.0002}{3}$$\n\n$$= 1 - 0.2 + 0.02 - 0.001333 + 0.000067$$\n\n$$= 0.818734$$\n\nDus $e^{-0.2} \\approx 0.81873$"
+      },
+      {
+        "points": 15,
+        "criteria": [
+          {
+            "label": "Bekende reeks van sin(u) correct gebruikt",
+            "points": 3
+          },
+          {
+            "label": "Substitutie u = x² correct uitgevoerd",
+            "points": 3
+          },
+          {
+            "label": "Factor x correct meegenomen",
+            "points": 3
+          },
+          {
+            "label": "Eerste 4 niet-nul termen correct bepaald",
+            "points": 3
+          },
+          {
+            "label": "Integraal correct berekend",
+            "points": 3
+          }
+        ],
+        "question": "## Taylorreeks van $f(x) = x \\sin(x^2)$\n\nBeschouw de functie $f(x) = x \\sin(x^2)$.\n\n**(a)** Bepaal de Taylorreeks rond $x = 0$ van $x \\sin(x^2)$. Geef de eerste 4 niet-nul termen. (9p)\n\n**(b)** Bepaal de onbepaalde integraal $\\int x\\sin(x^2) \\, dx$ door term-voor-term integratie van de Taylorreeks. Geef alle termen van het resultaat. (6p)",
+        "answer": "## Oplossing\n\n**(a)** Taylorreeks van $x \\sin(x^2)$\n\n**Aanpak**: We gebruiken de bekende Taylorreeks van $\\sin(u)$, substitueren $u = x^2$, en vermenigvuldigen met $x$.\n\n*Opmerking: Als je de standaard reeks van sin(u) niet uit je hoofd kent, kun je deze afleiden via herhaalde differentiatie en de Taylor formule.*\n\nDe bekende Taylorreeks van $\\sin(u)$ rond $u = 0$ is:\n$$\\sin(u) = u - \\frac{u^3}{3!} + \\frac{u^5}{5!} - \\frac{u^7}{7!} + \\cdots = \\sum_{n=0}^{\\infty} \\frac{(-1)^n u^{2n+1}}{(2n+1)!}$$\n\nDoor substitutie van $u = x^2$:\n$$\\sin(x^2) = x^2 - \\frac{(x^2)^3}{3!} + \\frac{(x^2)^5}{5!} - \\frac{(x^2)^7}{7!} + \\cdots$$\n\n$$= x^2 - \\frac{x^6}{6} + \\frac{x^{10}}{120} - \\frac{x^{14}}{5040} + \\cdots$$\n\nVermenigvuldigen met $x$:\n$$x \\sin(x^2) = x \\cdot \\left(x^2 - \\frac{x^6}{6} + \\frac{x^{10}}{120} - \\frac{x^{14}}{5040} + \\cdots\\right)$$\n\n$$= x^3 - \\frac{x^7}{6} + \\frac{x^{11}}{120} - \\frac{x^{15}}{5040} + \\cdots$$\n\nDe eerste 4 niet-nul termen zijn: $x^3 - \\frac{x^7}{6} + \\frac{x^{11}}{120} - \\frac{x^{15}}{5040}$\n\n**(b)** Onbepaalde integraal via term-voor-term integratie\n\nIntegreer de Taylorreeks uit (a) term voor term:\n$$\\int x\\sin(x^2) \\, dx = \\int \\left(x^3 - \\frac{x^7}{6} + \\frac{x^{11}}{120} - \\frac{x^{15}}{5040} + \\cdots\\right) dx$$\n\n$$= \\frac{x^4}{4} - \\frac{x^8}{48} + \\frac{x^{12}}{1440} - \\frac{x^{16}}{80640} + \\cdots + C$$\n\nwaar $C$ de integratieconstante is.\n\nDe primitieve functie is:\n$$F(x) = \\frac{x^4}{4} - \\frac{x^8}{48} + \\frac{x^{12}}{1440} - \\frac{x^{16}}{80640} + \\cdots + C$$"
+      },
+      {
+        "points": 15,
+        "criteria": [
+          {
+            "label": "Taylorreeks correct opgesteld rond x=0",
+            "points": 3
+          },
+          {
+            "label": "Herhaalde differentiatie correct uitgevoerd",
+            "points": 4
+          },
+          {
+            "label": "Eerste 6 termen correct bepaald",
+            "points": 3
+          },
+          {
+            "label": "Convergentiestraal correct berekend",
+            "points": 3
+          },
+          {
+            "label": "Functiewaarde ln(1.2) correct benaderd",
+            "points": 2
+          }
+        ],
+        "question": "## Taylorreeks van $f(x) = \\ln(1+x)$\n\nBeschouw de functie $f(x) = \\ln(1+x)$.\n\n**(a)** Bepaal de Taylorreeks rond $x = 0$ van $\\ln(1+x)$. Geef de eerste 6 termen. (10p)\n\n**(b)** Bepaal de convergentiestraal van deze reeks. (3p)\n\n**(c)** Benader $\\ln(1.2)$ met de eerste 4 termen en geef het antwoord op 4 decimalen. (2p)",
+        "answer": "## Oplossing\n\n**(a)** Taylorreeks van $\\ln(1+x)$ via differentiatie:\n\n*Opmerking: Als je de standaard reeks van ln(1+x) niet uit je hoofd kent, kun je deze afleiden via herhaalde differentiatie en de Taylor formule.*\n\nBereken achtereenvolgens:\n- $f(x) = \\ln(1+x)$ → $f(0) = \\ln(1) = 0$\n- $f'(x) = \\frac{1}{1+x}$ → $f'(0) = 1$  \n- $f''(x) = -\\frac{1}{(1+x)^2}$ → $f''(0) = -1$\n- $f'''(x) = \\frac{2}{(1+x)^3}$ → $f'''(0) = 2$\n- $f^{(4)}(x) = -\\frac{6}{(1+x)^4}$ → $f^{(4)}(0) = -6$\n- $f^{(5)}(x) = \\frac{24}{(1+x)^5}$ → $f^{(5)}(0) = 24$\n\nDe Taylorreeks is:\n$$\\ln(1+x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(0)}{n!} x^n$$\n\n$$= 0 + \\frac{1}{1!}x + \\frac{-1}{2!}x^2 + \\frac{2}{3!}x^3 + \\frac{-6}{4!}x^4 + \\frac{24}{5!}x^5 + \\cdots$$\n\n$$= x - \\frac{x^2}{2} + \\frac{x^3}{3} - \\frac{x^4}{4} + \\frac{x^5}{5} + \\cdots$$\n\nAlgemene vorm: $\\ln(1+x) = \\sum_{n=1}^{\\infty} \\frac{(-1)^{n+1} x^n}{n}$\n\n**(b)** Convergentiestraal:\n\nGebruik de ratio test op de coëfficiënten $a_n = \\frac{(-1)^{n+1}}{n}$:\n\n$$\\left|\\frac{a_{n+1}}{a_n}\\right| = \\left|\\frac{(-1)^{n+2}/(n+1)}{(-1)^{n+1}/n}\\right| = \\left|\\frac{-n}{n+1}\\right| = \\frac{n}{n+1}$$\n\n$$\\lim_{n \\to \\infty} \\frac{n}{n+1} = \\lim_{n \\to \\infty} \\frac{1}{1 + 1/n} = 1$$\n\nDe convergentiestraal is $R = 1$.\n\nDe reeks convergeert voor $|x| < 1$ en divergeert voor $|x| > 1$.\n\n**(c)** Benadering van $\\ln(1.2)$:\n\nVoor $x = 0.2$ (binnen convergentiestraal):\n$$\\ln(1.2) \\approx 0.2 - \\frac{(0.2)^2}{2} + \\frac{(0.2)^3}{3} - \\frac{(0.2)^4}{4}$$\n\n$$= 0.2 - \\frac{0.04}{2} + \\frac{0.008}{3} - \\frac{0.0016}{4}$$\n\n$$= 0.2 - 0.02 + 0.002667 - 0.0004$$\n\n$$= 0.182267$$\n\nDus $\\ln(1.2) \\approx 0.1823$"
+      }
+    ],
+    "fourier_normal": [
+      {
+        "points": 14,
+        "criteria": [
+          {
+            "label": "Even/oneven correct bepalen",
+            "points": 2
+          },
+          {
+            "label": "a₀ correct berekend",
+            "points": 3
+          },
+          {
+            "label": "aₙ = 0 correct beredeneerd",
+            "points": 2
+          },
+          {
+            "label": "Partiële integratie voor bₙ correct",
+            "points": 4
+          },
+          {
+            "label": "Fourierreeks correct opgeschreven",
+            "points": 3
+          }
+        ],
+        "question": "## Fourierreeks van $f(x) = -x + 1$\n\nGegeven de functie $f(x) = -x + 1$ op het interval $[-\\pi, \\pi]$ met periode $T = 2\\pi$.\n\n**(a)** Bepaal of $f(x)$ even, oneven of geen van beide is. (2p)\n\n**(b)** Bereken de constante term $a_0$. (4p)\n\n**(c)** Bereken de coëfficiënten $a_n$ en $b_n$. (6p)\n\n**(d)** Schrijf de volledige Fourierreeks op. (2p)",
+        "answer": "## Oplossing\n\n**(a)** Bepalen van symmetrie:\n\n- $f(x) = -x + 1$\n- $f(-x) = -(-x) + 1 = x + 1$\n\nAangezien $f(x) \\neq f(-x)$ en $f(x) \\neq -f(-x)$, is de functie **noch even noch oneven**.\n\n**(b)** Constante term:\n\n$$a_0 = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} (-x + 1) \\, dx = \\frac{1}{\\pi} \\left[ -\\frac{x^2}{2} + x \\right]_{-\\pi}^{\\pi}$$\n\n$$= \\frac{1}{\\pi} \\left[ \\left(-\\frac{\\pi^2}{2} + \\pi\\right) - \\left(-\\frac{\\pi^2}{2} - \\pi\\right) \\right] = \\frac{1}{\\pi} \\cdot 2\\pi = 2$$\n\n**(c)** Coëfficiënten $a_n$:\n\n$$a_n = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} (-x + 1) \\cos(nx) \\, dx$$\n\nDoor symmetrie en het feit dat $(-x + 1)\\cos(nx)$ een oneven functie is in $x$: $a_n = 0$ voor $n \\geq 1$.\n\nCoëfficiënten $b_n$:\n$$b_n = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} (-x + 1) \\sin(nx) \\, dx$$\n\nMet partiële integratie:\n$$b_n = \\frac{1}{\\pi} \\left[ -\\int_{-\\pi}^{\\pi} x \\sin(nx) \\, dx + \\int_{-\\pi}^{\\pi} \\sin(nx) \\, dx \\right]$$\n\nDe tweede integraal is 0. Voor de eerste:\n$$\\int_{-\\pi}^{\\pi} x \\sin(nx) \\, dx = \\left[ -\\frac{x \\cos(nx)}{n} \\right]_{-\\pi}^{\\pi} + \\frac{1}{n} \\int_{-\\pi}^{\\pi} \\cos(nx) \\, dx$$\n\n$$= -\\frac{\\pi \\cos(n\\pi) - (-\\pi) \\cos(-n\\pi)}{n} = -\\frac{2\\pi \\cos(n\\pi)}{n} = -\\frac{2\\pi (-1)^n}{n}$$\n\nDus: $b_n = \\frac{2(-1)^n}{n}$\n\n**(d)** Fourierreeks:\n\n$$f(x) = 1 + \\sum_{n=1}^{\\infty} \\frac{2(-1)^n}{n} \\sin(nx)$$"
+      },
+      {
+        "points": 14,
+        "criteria": [
+          {
+            "label": "Even functie correct herkend",
+            "points": 2
+          },
+          {
+            "label": "a₀ correct berekend",
+            "points": 3
+          },
+          {
+            "label": "bₙ = 0 correct beredeneerd",
+            "points": 2
+          },
+          {
+            "label": "Partiële integratie voor aₙ correct",
+            "points": 4
+          },
+          {
+            "label": "Fourierreeks correct opgeschreven",
+            "points": 3
+          }
+        ],
+        "question": "## Fourierreeks van $f(x) = x^2$\n\nGegeven de functie $f(x) = x^2$ op het interval $[-\\pi, \\pi]$ met periode $T = 2\\pi$.\n\n**(a)** Bepaal of $f(x)$ even, oneven of geen van beide is. (2p)\n\n**(b)** Bereken de constante term $a_0$. (3p)\n\n**(c)** Bereken de coëfficiënten $a_n$ en $b_n$. (6p)\n\n**(d)** Schrijf de volledige Fourierreeks op. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Bepalen van symmetrie:\n\n- $f(x) = x^2$\n- $f(-x) = (-x)^2 = x^2 = f(x)$\n\nDe functie is **even**, dus $b_n = 0$ voor alle $n \\geq 1$.\n\n**(b)** Constante term:\n\n$$a_0 = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} x^2 \\, dx = \\frac{2}{\\pi} \\int_0^{\\pi} x^2 \\, dx = \\frac{2}{\\pi} \\left[ \\frac{x^3}{3} \\right]_0^{\\pi}$$\n\n$$= \\frac{2}{\\pi} \\cdot \\frac{\\pi^3}{3} = \\frac{2\\pi^2}{3}$$\n\n**(c)** Coëfficiënten:\n\nOmdat $f(x)$ even is: $b_n = 0$ voor alle $n \\geq 1$.\n\nVoor $a_n$:\n$$a_n = \\frac{2}{\\pi} \\int_0^{\\pi} x^2 \\cos(nx) \\, dx$$\n\nTweemaal partiële integratie:\nEerste keer: $u = x^2$, $dv = \\cos(nx) dx$\n$$\\int_0^{\\pi} x^2 \\cos(nx) \\, dx = \\left[ \\frac{x^2 \\sin(nx)}{n} \\right]_0^{\\pi} - \\frac{2}{n} \\int_0^{\\pi} x \\sin(nx) \\, dx$$\n\nDe eerste term is 0. Voor de tweede integraal, opnieuw partiële integratie:\n$$\\int_0^{\\pi} x \\sin(nx) \\, dx = \\left[ -\\frac{x \\cos(nx)}{n} \\right]_0^{\\pi} + \\frac{1}{n} \\int_0^{\\pi} \\cos(nx) \\, dx$$\n\n$$= -\\frac{\\pi \\cos(n\\pi)}{n} + \\frac{1}{n} \\left[ \\frac{\\sin(nx)}{n} \\right]_0^{\\pi} = \\frac{-\\pi (-1)^n}{n}$$\n\nDus:\n$$a_n = \\frac{2}{\\pi} \\cdot \\frac{2}{n} \\cdot \\frac{\\pi (-1)^n}{n} = \\frac{4(-1)^n}{n^2}$$\n\n**(d)** Fourierreeks:\n\n$$f(x) = \\frac{\\pi^2}{3} + \\sum_{n=1}^{\\infty} \\frac{4(-1)^n}{n^2} \\cos(nx)$$"
+      },
+      {
+        "points": 14,
+        "criteria": [
+          {
+            "label": "Oneven functie correct herkend",
+            "points": 2
+          },
+          {
+            "label": "a₀ = 0 en aₙ = 0 correct beredeneerd",
+            "points": 3
+          },
+          {
+            "label": "Partiële integratie voor bₙ correct uitgevoerd",
+            "points": 5
+          },
+          {
+            "label": "Coëfficiënten correct berekend",
+            "points": 2
+          },
+          {
+            "label": "Fourierreeks correct opgeschreven",
+            "points": 2
+          }
+        ],
+        "question": "## Fourierreeks van zaagtandfunctie\n\nGegeven de zaagtandfunctie op het interval $[-\\pi, \\pi]$ met periode $T = 2\\pi$:\n$$f(x) = \\begin{cases} x & \\text{als } -\\pi < x < \\pi \\\\ 0 & \\text{als } x = \\pm\\pi \\end{cases}$$\n\n**(a)** Bepaal of $f(x)$ even, oneven of geen van beide is. (2p)\n\n**(b)** Bereken de constante term $a_0$ en de coëfficiënten $a_n$. (3p)\n\n**(c)** Bereken de coëfficiënten $b_n$. (7p)\n\n**(d)** Schrijf de volledige Fourierreeks op. (2p)",
+        "answer": "## Oplossing\n\n**(a)** Bepalen van symmetrie:\n\n- $f(x) = x$\n- $f(-x) = -x = -f(x)$\n\nDe functie is **oneven**, dus $a_0 = 0$ en $a_n = 0$ voor alle $n \\geq 1$.\n\n**(b)** Constante term en $a_n$ coëfficiënten:\n\nOmdat $f(x)$ oneven is:\n- $a_0 = 0$ (integraal van oneven functie over symmetrisch interval)\n- $a_n = 0$ voor alle $n \\geq 1$ (product van oneven en even functie is oneven)\n\n**(c)** Coëfficiënten $b_n$:\n\n$$b_n = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} x \\sin(nx) \\, dx = \\frac{2}{\\pi} \\int_0^{\\pi} x \\sin(nx) \\, dx$$\n\n(laatste gelijkheid door oneven × oneven = even functie)\n\n**Partiële integratie** met $u = x$ en $dv = \\sin(nx) dx$:\n- $du = dx$ en $v = -\\frac{\\cos(nx)}{n}$\n\n$$b_n = \\frac{2}{\\pi} \\left[ \\left. -\\frac{x \\cos(nx)}{n} \\right|_0^{\\pi} + \\frac{1}{n} \\int_0^{\\pi} \\cos(nx) \\, dx \\right]$$\n\n$$= \\frac{2}{\\pi} \\left[ -\\frac{\\pi \\cos(n\\pi)}{n} + \\frac{1}{n} \\left. \\frac{\\sin(nx)}{n} \\right|_0^{\\pi} \\right]$$\n\n$$= \\frac{2}{\\pi} \\left[ -\\frac{\\pi \\cos(n\\pi)}{n} + 0 \\right]$$\n\n$$= -\\frac{2 \\cos(n\\pi)}{n} = -\\frac{2(-1)^n}{n} = \\frac{2(-1)^{n+1}}{n}$$\n\n**(d)** Fourierreeks:\n\n$$f(x) = \\sum_{n=1}^{\\infty} \\frac{2(-1)^{n+1}}{n} \\sin(nx) = 2\\sin(x) - \\sin(2x) + \\frac{2\\sin(3x)}{3} - \\frac{\\sin(4x)}{2} + \\cdots$$"
+      },
+      {
+        "points": 14,
+        "criteria": [
+          {
+            "label": "Even functie correct herkend",
+            "points": 2
+          },
+          {
+            "label": "Constante term a₀ correct berekend",
+            "points": 3
+          },
+          {
+            "label": "bₙ = 0 correct beredeneerd",
+            "points": 2
+          },
+          {
+            "label": "Integratie voor aₙ correct uitgevoerd",
+            "points": 4
+          },
+          {
+            "label": "Fourierreeks correct opgeschreven",
+            "points": 3
+          }
+        ],
+        "question": "## Fourierreeks van driehoekfunctie\n\nGegeven de periodieke functie met periode $T = 2\\pi$:\n$$f(x) = \\begin{cases} \nx + \\pi & \\text{als } -\\pi \\leq x \\leq 0 \\\\\n\\pi - x & \\text{als } 0 \\leq x \\leq \\pi\n\\end{cases}$$\n\nDeze functie vormt een driehoek die van 0 naar $\\pi$ loopt en weer terug naar 0.\n\n**(a)** Bepaal of $f(x)$ even, oneven of geen van beide is. (2p)\n\n**(b)** Bereken de constante term $a_0$. (3p)\n\n**(c)** Bereken de coëfficiënten $a_n$ en $b_n$. (7p)\n\n**(d)** Schrijf de volledige Fourierreeks op. (2p)",
+        "answer": "## Oplossing\n\n**(a)** Bepalen van symmetrie:\n\nControleer $f(-x)$:\n- Voor $x \\in [0, \\pi]$: $f(x) = \\pi - x$ en $f(-x) = -x + \\pi = \\pi - x = f(x)$\n- Voor $x \\in [-\\pi, 0]$: $f(x) = x + \\pi$ en $f(-x) = -(x) + \\pi = -x + \\pi = \\pi - x$\n\nMaar voor $x \\in [-\\pi, 0]$ geldt $-x \\in [0, \\pi]$, dus $f(-x) = \\pi - (-x) = \\pi + x = f(x)$.\n\nDe functie is **even**: $f(-x) = f(x)$, dus $b_n = 0$ voor alle $n \\geq 1$.\n\n**(b)** Constante term:\n\n$$a_0 = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} f(x) \\, dx = \\frac{2}{\\pi} \\int_0^{\\pi} f(x) \\, dx$$\n\n$$= \\frac{2}{\\pi} \\int_0^{\\pi} (\\pi - x) \\, dx$$\n\n$$= \\frac{2}{\\pi} \\left[ \\pi x - \\frac{x^2}{2} \\right]_0^{\\pi}$$\n\n$$= \\frac{2}{\\pi} \\left[ \\pi^2 - \\frac{\\pi^2}{2} \\right] = \\frac{2}{\\pi} \\cdot \\frac{\\pi^2}{2} = \\pi$$\n\n**(c)** Coëfficiënten:\n\nOmdat $f(x)$ even is: $b_n = 0$ voor alle $n \\geq 1$.\n\nVoor $a_n$:\n$$a_n = \\frac{2}{\\pi} \\int_0^{\\pi} f(x) \\cos(nx) \\, dx = \\frac{2}{\\pi} \\int_0^{\\pi} (\\pi - x) \\cos(nx) \\, dx$$\n\n$$= \\frac{2}{\\pi} \\left[ \\pi \\int_0^{\\pi} \\cos(nx) \\, dx - \\int_0^{\\pi} x \\cos(nx) \\, dx \\right]$$\n\nEerste integraal:\n$$\\int_0^{\\pi} \\cos(nx) \\, dx = \\left[ \\frac{\\sin(nx)}{n} \\right]_0^{\\pi} = \\frac{\\sin(n\\pi)}{n} = 0$$\n\n(omdat $\\sin(n\\pi) = 0$ voor alle gehele $n$)\n\nTweede integraal (partiële integratie met $u = x$, $dv = \\cos(nx)dx$):\n$$\\int_0^{\\pi} x \\cos(nx) \\, dx = \\left[ \\frac{x \\sin(nx)}{n} \\right]_0^{\\pi} - \\frac{1}{n} \\int_0^{\\pi} \\sin(nx) \\, dx$$\n\n$$= \\frac{\\pi \\sin(n\\pi)}{n} + \\frac{1}{n^2} \\left[ \\cos(nx) \\right]_0^{\\pi}$$\n\n$$= 0 + \\frac{1}{n^2} [\\cos(n\\pi) - 1] = \\frac{(-1)^n - 1}{n^2}$$\n\nDus:\n$$a_n = \\frac{2}{\\pi} \\left[ 0 - \\frac{(-1)^n - 1}{n^2} \\right] = \\frac{2(1 - (-1)^n)}{\\pi n^2}$$\n\nVoor oneven $n$: $a_n = \\frac{4}{\\pi n^2}$\nVoor even $n$: $a_n = 0$\n\n**(d)** Fourierreeks:\n\n$$f(x) = \\frac{\\pi}{2} + \\sum_{\\substack{n=1,3,5,...}} \\frac{4}{\\pi n^2} \\cos(nx)$$\n\n$$= \\frac{\\pi}{2} + \\frac{4}{\\pi} \\left[ \\cos(x) + \\frac{\\cos(3x)}{9} + \\frac{\\cos(5x)}{25} + \\cdots \\right]$$"
+      }
+    ],
+    "fourier_complex": [
+      {
+        "points": 14,
+        "criteria": [
+          {
+            "label": "Even/oneven correct bepaald",
+            "points": 2
+          },
+          {
+            "label": "c₀ correct berekend",
+            "points": 3
+          },
+          {
+            "label": "Integraal voor cₙ correct opgesteld",
+            "points": 3
+          },
+          {
+            "label": "Complexe exponentiële identiteiten correct toegepast",
+            "points": 2
+          },
+          {
+            "label": "Eindresultaat cₙ correct bepaald",
+            "points": 2
+          },
+          {
+            "label": "Complexe Fourierreeks correct opgeschreven",
+            "points": 2
+          }
+        ],
+        "question": "## Complexe Fourierreeks\n\nGegeven de periodieke functie met periode $T = 2\\pi$:\n$$f(t) = \\begin{cases} 1 & \\text{als } 0 \\leq t < \\pi \\\\ -1 & \\text{als } \\pi \\leq t < 2\\pi \\end{cases}$$\n\n**(a)** Bepaal of $f(t)$ even, oneven of geen van beide is. (2p)\n\n**(b)** Bereken de constante term $c_0$. (3p)\n\n**(c)** Stel de integraal op voor de berekening van $c_n$ en werk deze uit. (6p)\n\n**(d)** Schrijf de complexe Fourierreeks van $f(t)$ op. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Even of oneven:\n\nDe functie is **noch even noch oneven**: $f(-t) \\neq f(t)$ en $f(-t) \\neq -f(t)$.\n\n**(b)** Constante term $c_0$:\n\n$$c_0 = \\frac{1}{T} \\int_0^T f(t) \\, dt = \\frac{1}{2\\pi} \\int_0^{2\\pi} f(t) \\, dt$$\n\n$$= \\frac{1}{2\\pi} \\left[ \\int_0^{\\pi} 1 \\, dt + \\int_{\\pi}^{2\\pi} (-1) \\, dt \\right]$$\n\n$$= \\frac{1}{2\\pi} [\\pi - \\pi] = 0$$\n\n**(c)** Berekening van $c_n$:\n\n$$c_n = \\frac{1}{2\\pi} \\int_0^{2\\pi} f(t) e^{-int} \\, dt$$\n\n$$= \\frac{1}{2\\pi} \\left[ \\int_0^{\\pi} 1 \\cdot e^{-int} \\, dt + \\int_{\\pi}^{2\\pi} (-1) \\cdot e^{-int} \\, dt \\right]$$\n\n$$= \\frac{1}{2\\pi} \\left[ \\frac{-e^{-int}}{in} \\Big|_0^{\\pi} - \\frac{-e^{-int}}{in} \\Big|_{\\pi}^{2\\pi} \\right]$$\n\n$$= \\frac{1}{2\\pi} \\cdot \\frac{1}{in} \\left[ -e^{-in\\pi} + 1 + e^{-2in\\pi} - e^{-in\\pi} \\right]$$\n\nGebruikmakend van $e^{-in\\pi} = (-1)^n$ en $e^{-2in\\pi} = 1$:\n\n$$c_n = \\frac{1}{2\\pi in} [1 - 2(-1)^n + 1] = \\frac{2(1 - (-1)^n)}{2\\pi in} = \\frac{1 - (-1)^n}{\\pi in}$$\n\nVoor oneven $n$: $c_n = \\frac{2}{\\pi in}$  \nVoor even $n \\neq 0$: $c_n = 0$\n\n**(d)** Complexe Fourierreeks:\n\n$$f(t) = \\sum_{k=-\\infty}^{\\infty} \\frac{2}{\\pi i(2k+1)} e^{i(2k+1)t}$$"
+      },
+      {
+        "points": 14,
+        "criteria": [
+          {
+            "label": "Even/oneven correct bepaald",
+            "points": 2
+          },
+          {
+            "label": "c₀ correct berekend",
+            "points": 3
+          },
+          {
+            "label": "Integraal voor cₙ correct opgesteld",
+            "points": 3
+          },
+          {
+            "label": "Complexe exponentiële identiteiten correct toegepast",
+            "points": 2
+          },
+          {
+            "label": "Eindresultaat cₙ correct bepaald",
+            "points": 2
+          },
+          {
+            "label": "Complexe Fourierreeks correct opgeschreven",
+            "points": 2
+          }
+        ],
+        "question": "## Complexe Fourierreeks van eenvoudige driehoek\n\nGegeven de periodieke driehoekfunctie met periode $T = 2\\pi$:\n$$f(t) = \\begin{cases} 1 + \\frac{t}{\\pi} & \\text{als } -\\pi \\leq t \\leq 0 \\\\ 1 - \\frac{t}{\\pi} & \\text{als } 0 \\leq t \\leq \\pi \\end{cases}$$\n\n**(a)** Bepaal of $f(t)$ even, oneven of geen van beide is. (2p)\n\n**(b)** Bereken de constante term $c_0$. (3p)\n\n**(c)** Stel de integraal op voor de berekening van $c_n$ en werk deze uit. (6p)\n\n**(d)** Schrijf de complexe Fourierreeks van $f(t)$ op. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Even of oneven:\n\nDe functie is **even**: $f(-t) = f(t)$.\n\nControle: Voor $t \\in [0,\\pi]$: $f(t) = 1 - \\frac{t}{\\pi}$ en $f(-t) = 1 + \\frac{-t}{\\pi} = 1 - \\frac{t}{\\pi} = f(t)$.\n\n**(b)** Constante term $c_0$:\n\n$$c_0 = \\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} f(t) \\, dt$$\n\nDoor symmetrie (even functie):\n$$c_0 = \\frac{2}{2\\pi} \\int_0^{\\pi} \\left(1 - \\frac{t}{\\pi}\\right) \\, dt$$\n\n$$= \\frac{1}{\\pi} \\left[ t - \\frac{t^2}{2\\pi} \\right]_0^{\\pi}$$\n\n$$= \\frac{1}{\\pi} \\left[ \\pi - \\frac{\\pi^2}{2\\pi} \\right] = \\frac{1}{\\pi} \\left[ \\pi - \\frac{\\pi}{2} \\right]$$\n\n$$= \\frac{1}{\\pi} \\cdot \\frac{\\pi}{2} = \\frac{1}{2}$$\n\n**(c)** Berekening van $c_n$:\n\n$$c_n = \\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} f(t) e^{-int} \\, dt$$\n\nOmdat $f(t)$ even is, en $e^{-int} = \\cos(nt) - i\\sin(nt)$, valt het oneven deel weg:\n$$c_n = \\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} f(t) \\cos(nt) \\, dt = \\frac{2}{2\\pi} \\int_0^{\\pi} \\left(1 - \\frac{t}{\\pi}\\right) \\cos(nt) \\, dt$$\n\n$$= \\frac{1}{\\pi} \\left[ \\int_0^{\\pi} \\cos(nt) \\, dt - \\frac{1}{\\pi} \\int_0^{\\pi} t \\cos(nt) \\, dt \\right]$$\n\nDe eerste integraal is 0 voor $n \\neq 0$. Voor de tweede integraal gebruik partiële integratie:\n\n$$\\int_0^{\\pi} t \\cos(nt) \\, dt = \\left[ \\frac{t \\sin(nt)}{n} \\right]_0^{\\pi} - \\frac{1}{n} \\int_0^{\\pi} \\sin(nt) \\, dt$$\n\n$$= 0 - \\frac{1}{n} \\left[ -\\frac{\\cos(nt)}{n} \\right]_0^{\\pi} = \\frac{1}{n^2}[\\cos(n\\pi) - 1]$$\n\n$$= \\frac{1}{n^2}[(-1)^n - 1]$$\n\nDus voor $n \\neq 0$:\n$$c_n = -\\frac{1}{\\pi^2 n^2}[(-1)^n - 1]$$\n\nVoor oneven $n$: $c_n = \\frac{2}{\\pi^2 n^2}$\nVoor even $n \\neq 0$: $c_n = 0$\n\n**(d)** Complexe Fourierreeks:\n\n$$f(t) = \\frac{1}{2} + \\sum_{k=-\\infty}^{\\infty} \\frac{2}{\\pi^2 (2k+1)^2} e^{i(2k+1)t}$$"
+      },
+      {
+        "points": 14,
+        "criteria": [
+          {
+            "label": "Even/oneven correct bepaald",
+            "points": 2
+          },
+          {
+            "label": "Constante term c₀ correct berekend",
+            "points": 3
+          },
+          {
+            "label": "Integraal voor cₙ correct opgesteld",
+            "points": 3
+          },
+          {
+            "label": "Complexe integratie correct uitgevoerd",
+            "points": 4
+          },
+          {
+            "label": "Complexe Fourierreeks correct opgeschreven",
+            "points": 2
+          }
+        ],
+        "question": "## Complexe Fourierreeks van halfronde golf\n\nGegeven de periodieke halfronde golf met periode $T = 2\\pi$:\n$$f(t) = \\begin{cases} \\sin(t) & \\text{als } 0 \\leq t < \\pi \\\\ 0 & \\text{als } \\pi \\leq t < 2\\pi \\end{cases}$$\n\n**(a)** Bepaal of $f(t)$ even, oneven of geen van beide is. (2p)\n\n**(b)** Bereken de constante term $c_0$. (3p)\n\n**(c)** Stel de integraal op voor de berekening van $c_n$ en werk deze uit. (7p)\n\n**(d)** Schrijf de complexe Fourierreeks van $f(t)$ op. (2p)",
+        "answer": "## Oplossing\n\n**(a)** Even of oneven:\n\nDe functie is **noch even noch oneven**: $f(-t) \\neq f(t)$ en $f(-t) \\neq -f(t)$.\n\n**(b)** Constante term $c_0$:\n\n$$c_0 = \\frac{1}{2\\pi} \\int_0^{2\\pi} f(t) \\, dt = \\frac{1}{2\\pi} \\int_0^{\\pi} \\sin(t) \\, dt$$\n\n$$= \\frac{1}{2\\pi} \\left[ -\\cos(t) \\right]_0^{\\pi} = \\frac{1}{2\\pi} [-\\cos(\\pi) + \\cos(0)]$$\n\n$$= \\frac{1}{2\\pi} [1 + 1] = \\frac{1}{\\pi}$$\n\n**(c)** Berekening van $c_n$:\n\n$$c_n = \\frac{1}{2\\pi} \\int_0^{2\\pi} f(t) e^{-int} \\, dt = \\frac{1}{2\\pi} \\int_0^{\\pi} \\sin(t) e^{-int} \\, dt$$\n\nGebruik $\\sin(t) = \\frac{e^{it} - e^{-it}}{2i}$:\n\n$$c_n = \\frac{1}{2\\pi} \\int_0^{\\pi} \\frac{e^{it} - e^{-it}}{2i} e^{-int} \\, dt$$\n\n$$= \\frac{1}{4\\pi i} \\left[ \\int_0^{\\pi} e^{i(1-n)t} \\, dt - \\int_0^{\\pi} e^{-i(1+n)t} \\, dt \\right]$$\n\n**Voor $n \\neq 1$ en $n \\neq -1$**:\n$$c_n = \\frac{1}{4\\pi i} \\left[ \\frac{e^{i(1-n)\\pi} - 1}{i(1-n)} - \\frac{e^{-i(1+n)\\pi} - 1}{-i(1+n)} \\right]$$\n\n**Voor $n = 1$**:\n$$c_1 = \\frac{1}{4\\pi i} \\left[ \\pi - \\frac{e^{-2i\\pi} - 1}{-2i} \\right] = \\frac{1}{4\\pi i} \\left[ \\pi - 0 \\right] = \\frac{1}{4i}$$\n\n**Voor $n = -1$**:\n$$c_{-1} = \\frac{1}{4\\pi i} \\left[ \\frac{e^{2i\\pi} - 1}{2i} - \\pi \\right] = \\frac{1}{4\\pi i} \\left[ 0 - \\pi \\right] = -\\frac{1}{4i}$$\n\n**Voor andere waarden van $n$**:\nNa uitwerking krijgen we:\n$$c_n = \\frac{1}{\\pi} \\cdot \\frac{(-1)^n + 1}{1 - n^2}$$ voor $n \\neq \\pm 1$\n\nDit geeft $c_n = 0$ voor oneven $n \\neq \\pm 1$, en $c_n = \\frac{2}{\\pi(1-n^2)}$ voor even $n$.\n\n**(d)** Complexe Fourierreeks:\n\n$$f(t) = \\frac{1}{\\pi} + \\frac{1}{4i}e^{it} - \\frac{1}{4i}e^{-it} + \\sum_{\\substack{k=-\\infty \\\\ k \\neq 0}}^{\\infty} \\frac{2}{\\pi(1-(2k)^2)} e^{i2kt}$$"
+      },
+      {
+        "points": 14,
+        "criteria": [
+          {
+            "label": "Even/oneven correct bepaald",
+            "points": 3
+          },
+          {
+            "label": "Constante term c₀ correct berekend",
+            "points": 3
+          },
+          {
+            "label": "Complexe integratie correct uitgevoerd",
+            "points": 5
+          },
+          {
+            "label": "Complexe Fourierreeks correct opgeschreven",
+            "points": 3
+          }
+        ],
+        "question": "## Complexe Fourierreeks van exponentiële puls\n\nGegeven de periodieke functie met periode $T = 2\\pi$:\n$$f(t) = e^{-|t|} \\quad \\text{voor } t \\in [-\\pi, \\pi]$$\n\nen periodiek uitgebreid met periode $2\\pi$.\n\n**(a)** Bepaal of $f(t)$ even, oneven of geen van beide is. (3p)\n\n**(b)** Bereken de constante term $c_0$. (3p)\n\n**(c)** Stel de integraal op voor de berekening van $c_n$ en werk deze uit. (5p)\n\n**(d)** Schrijf de complexe Fourierreeks van $f(t)$ op. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Even of oneven:\n\nDe functie is **even**: $f(-t) = e^{-|-t|} = e^{-|t|} = f(t)$, dus $f(-t) = f(t)$.\n\n**(b)** Constante term $c_0$:\n\n$$c_0 = \\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} f(t) \\, dt = \\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} e^{-|t|} \\, dt$$\n\nOmdat $f(t)$ even is:\n$$c_0 = \\frac{1}{2\\pi} \\cdot 2 \\int_0^{\\pi} e^{-t} \\, dt = \\frac{1}{\\pi} \\int_0^{\\pi} e^{-t} \\, dt$$\n\n$$= \\frac{1}{\\pi} \\left[ -e^{-t} \\right]_0^{\\pi} = \\frac{1}{\\pi} \\left[ -e^{-\\pi} + 1 \\right] = \\frac{1 - e^{-\\pi}}{\\pi}$$\n\n**(c)** Berekening van $c_n$:\n\n$$c_n = \\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} e^{-|t|} e^{-int} \\, dt$$\n\nOmdat $f(t)$ even is en $e^{-int} = \\cos(nt) - i\\sin(nt)$, wordt dit:\n$$c_n = \\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} e^{-|t|} [\\cos(nt) - i\\sin(nt)] \\, dt$$\n\nHet oneven deel valt weg (product van even en oneven functie), dus:\n$$c_n = \\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} e^{-|t|} \\cos(nt) \\, dt = \\frac{1}{\\pi} \\int_0^{\\pi} e^{-t} \\cos(nt) \\, dt$$\n\n**Integratie door delen** (tweemaal):\nStel $u = \\cos(nt)$, $dv = e^{-t} dt$:\n$$\\int_0^{\\pi} e^{-t} \\cos(nt) \\, dt = \\left[ -e^{-t} \\cos(nt) \\right]_0^{\\pi} - n \\int_0^{\\pi} e^{-t} \\sin(nt) \\, dt$$\n\n$$= -e^{-\\pi} \\cos(n\\pi) + 1 - n \\int_0^{\\pi} e^{-t} \\sin(nt) \\, dt$$\n\nVoor de tweede integraal, opnieuw partieel integreren:\n$$\\int_0^{\\pi} e^{-t} \\sin(nt) \\, dt = \\left[ -e^{-t} \\sin(nt) \\right]_0^{\\pi} + n \\int_0^{\\pi} e^{-t} \\cos(nt) \\, dt$$\n\n$$= -e^{-\\pi} \\sin(n\\pi) + n \\int_0^{\\pi} e^{-t} \\cos(nt) \\, dt$$\n\n$$= n \\int_0^{\\pi} e^{-t} \\cos(nt) \\, dt$$ (omdat $\\sin(n\\pi) = 0$)\n\nSubstitutie terug:\n$$\\int_0^{\\pi} e^{-t} \\cos(nt) \\, dt = -e^{-\\pi} \\cos(n\\pi) + 1 - n^2 \\int_0^{\\pi} e^{-t} \\cos(nt) \\, dt$$\n\n$$(1 + n^2) \\int_0^{\\pi} e^{-t} \\cos(nt) \\, dt = 1 - e^{-\\pi} \\cos(n\\pi) = 1 - e^{-\\pi} (-1)^n$$\n\nDus:\n$$\\int_0^{\\pi} e^{-t} \\cos(nt) \\, dt = \\frac{1 - (-1)^n e^{-\\pi}}{1 + n^2}$$\n\nDaarme:\n$$c_n = \\frac{1}{\\pi} \\cdot \\frac{1 - (-1)^n e^{-\\pi}}{1 + n^2} = \\frac{1 - (-1)^n e^{-\\pi}}{\\pi(1 + n^2)}$$\n\n**(d)** Complexe Fourierreeks:\n\n$$f(t) = \\frac{1 - e^{-\\pi}}{\\pi} + \\sum_{n=1}^{\\infty} \\frac{2[1 - (-1)^n e^{-\\pi}]}{\\pi(1 + n^2)} \\cos(nt)$$\n\nIn complexe vorm:\n$$f(t) = \\sum_{n=-\\infty}^{\\infty} \\frac{1 - (-1)^n e^{-\\pi}}{\\pi(1 + n^2)} e^{int}$$"
+      }
+    ],
+    "fourier_transform": [
+      {
+        "points": 12,
+        "criteria": [
+          {
+            "label": "Integraal correct opgesteld",
+            "points": 3
+          },
+          {
+            "label": "Integraal correct gesplitst volgens functiedefinitie",
+            "points": 3
+          },
+          {
+            "label": "Complexe exponentialen correct geëvalueerd",
+            "points": 3
+          },
+          {
+            "label": "Resultaat correct gecombineerd en vereenvoudigd",
+            "points": 3
+          }
+        ],
+        "question": "## Fouriertransformatie van rechthoekpuls\n\nGegeven de rechthoekpuls functie:\n$$f(t) = \\begin{cases} 1 & \\text{als } |t| \\leq \\frac{T}{2} \\\\ 0 & \\text{als } |t| > \\frac{T}{2} \\end{cases}$$\n\n**(a)** Stel de Fouriertransformatie-integraal op voor $\\hat{f}(\\omega) = \\mathcal{F}\\{f(t)\\}$. (3p)\n\n**(b)** Bereken deze integraal stap voor stap. (6p)\n\n**(c)** Vereenvoudig het resultaat tot de eindvorm. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Integraal opstelling:\n\n$$\\hat{f}(\\omega) = \\int_{-\\infty}^{\\infty} f(t) e^{-i\\omega t} \\, dt$$\n\nOmdat $f(t) = 0$ buiten het interval $[-T/2, T/2]$:\n\n$$\\hat{f}(\\omega) = \\int_{-T/2}^{T/2} 1 \\cdot e^{-i\\omega t} \\, dt$$\n\n**(b)** Integraal berekening:\n\n$$\\hat{f}(\\omega) = \\int_{-T/2}^{T/2} e^{-i\\omega t} \\, dt$$\n\nVoor $\\omega \\neq 0$:\n\n$$\\hat{f}(\\omega) = \\left[ \\frac{e^{-i\\omega t}}{-i\\omega} \\right]_{-T/2}^{T/2}$$\n\n$$= \\frac{1}{-i\\omega} \\left[ e^{-i\\omega T/2} - e^{i\\omega T/2} \\right]$$\n\n$$= \\frac{1}{-i\\omega} \\cdot (-2i \\sin(\\omega T/2))$$\n\n$$= \\frac{2\\sin(\\omega T/2)}{\\omega}$$\n\nVoor $\\omega = 0$:\n\n$$\\hat{f}(0) = \\int_{-T/2}^{T/2} 1 \\, dt = T$$\n\n**(c)** Eindvorm:\n\nHet resultaat kan geschreven worden als:\n\n$$\\hat{f}(\\omega) = T \\cdot \\frac{\\sin(\\omega T/2)}{\\omega T/2} = T \\cdot \\text{sinc}\\left(\\frac{\\omega T}{2\\pi}\\right)$$\n\nwaar $\\text{sinc}(x) = \\sin(\\pi x)/(\\pi x)$ de genormaliseerde sinc-functie is."
+      },
+      {
+        "points": 12,
+        "criteria": [
+          {
+            "label": "Integraal correct opgesteld",
+            "points": 3
+          },
+          {
+            "label": "Integraal correct gesplitst volgens functiedefinitie",
+            "points": 3
+          },
+          {
+            "label": "Complexe exponentialen correct geëvalueerd",
+            "points": 3
+          },
+          {
+            "label": "Resultaat correct gecombineerd en vereenvoudigd",
+            "points": 3
+          }
+        ],
+        "question": "## Fouriertransformatie van exponentieel verval\n\nGegeven de functie:\n$$f(t) = \\begin{cases} e^{-at} & \\text{als } t \\geq 0 \\text{ en } a > 0 \\\\ 0 & \\text{als } t < 0 \\end{cases}$$\n\n**(a)** Stel de Fouriertransformatie-integraal op voor $\\hat{f}(\\omega) = \\mathcal{F}\\{f(t)\\}$. (3p)\n\n**(b)** Bereken deze integraal stap voor stap. (6p)\n\n**(c)** Vereenvoudig het resultaat tot de eindvorm. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Integraal opstelling:\n\n$$\\hat{f}(\\omega) = \\int_{-\\infty}^{\\infty} f(t) e^{-i\\omega t} \\, dt$$\n\nOmdat $f(t) = 0$ voor $t < 0$:\n\n$$\\hat{f}(\\omega) = \\int_0^{\\infty} e^{-at} e^{-i\\omega t} \\, dt = \\int_0^{\\infty} e^{-(a+i\\omega)t} \\, dt$$\n\n**(b)** Integraal berekening:\n\n$$\\hat{f}(\\omega) = \\int_0^{\\infty} e^{-(a+i\\omega)t} \\, dt$$\n\nVoor $a > 0$ (convergentievoorwaarde):\n\n$$\\hat{f}(\\omega) = \\left[ \\frac{e^{-(a+i\\omega)t}}{-(a+i\\omega)} \\right]_0^{\\infty}$$\n\n$$= \\frac{1}{-(a+i\\omega)} \\left[ e^{-(a+i\\omega)t} \\right]_0^{\\infty}$$\n\n$$= \\frac{1}{-(a+i\\omega)} [0 - 1] = \\frac{1}{a+i\\omega}$$\n\nDe grens bij $t \\to \\infty$ is nul omdat $a > 0$.\n\n**(c)** Eindvorm:\n\nHet resultaat kan ook geschreven worden in reële en imaginaire componenten:\n\n$$\\hat{f}(\\omega) = \\frac{1}{a+i\\omega} = \\frac{a-i\\omega}{a^2+\\omega^2}$$\n\n$$= \\frac{a}{a^2+\\omega^2} - i\\frac{\\omega}{a^2+\\omega^2}$$\n\nDit geeft de algebraïsche vorm van de Fouriertransformatie."
+      },
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Integraal correct opgesteld",
+            "points": 3
+          },
+          {
+            "label": "Exponent geschikt herschreven",
+            "points": 3
+          },
+          {
+            "label": "Eindresultaat correct bepaald",
+            "points": 4
+          }
+        ],
+        "question": "## Fouriertransformatie van $f(t) = e^{-\\frac{t^2}{2\\sigma^2}}$\n\nGegeven de functie\n$$f(t) = e^{-\\frac{t^2}{2\\sigma^2}}$$\nmet $\\sigma > 0$.\n\nJe mag hierbij de regel gebruiken:\n$$\\int_{-\\infty}^{\\infty} e^{-\\frac{u^2}{2}} \\, du = \\sqrt{2\\pi}$$\n\n**(a)** Stel de Fouriertransformatie-integraal op voor $\\hat{f}(\\omega) = \\mathcal{F}\\{f(t)\\}$. (3p)\n\n**(b)** Herschrijf de exponent zodanig dat je de integraal kunt vereenvoudigen. (3p)\n\n**(c)** Bepaal het eindresultaat voor $\\hat{f}(\\omega)$. (4p)",
+        "answer": "## Oplossing\n\n**(a)** Integraal opstelling:\n\n$$\\hat{f}(\\omega) = \\int_{-\\infty}^{\\infty} e^{-\\frac{t^2}{2\\sigma^2}} e^{-i\\omega t} \\, dt$$\n\n$$= \\int_{-\\infty}^{\\infty} e^{-\\frac{t^2}{2\\sigma^2} - i\\omega t} \\, dt$$\n\n**(b)** Exponent herschrijven:\n\nWe schrijven de exponent om als:\n$$-\\frac{t^2}{2\\sigma^2} - i\\omega t = -\\frac{1}{2\\sigma^2}(t + i\\omega\\sigma^2)^2 - \\frac{\\omega^2\\sigma^2}{2}$$\n\nDaarmee wordt:\n$$\\hat{f}(\\omega) = e^{-\\frac{\\omega^2\\sigma^2}{2}} \\int_{-\\infty}^{\\infty} e^{-\\frac{(t + i\\omega\\sigma^2)^2}{2\\sigma^2}} \\, dt$$\n\nMet de substitutie $u = \\frac{t + i\\omega\\sigma^2}{\\sigma}$ volgt $dt = \\sigma du$, dus:\n$$\\hat{f}(\\omega) = \\sigma e^{-\\frac{\\omega^2\\sigma^2}{2}} \\int_{-\\infty}^{\\infty} e^{-\\frac{u^2}{2}} \\, du$$\n\n**(c)** Eindresultaat:\n\nWe gebruiken de standaardintegraal\n$$\\int_{-\\infty}^{\\infty} e^{-\\frac{u^2}{2}} \\, du = \\sqrt{2\\pi}$$\n\nDus:\n$$\\hat{f}(\\omega) = \\sigma e^{-\\frac{\\omega^2\\sigma^2}{2}} \\sqrt{2\\pi}$$\n\n$$= \\sigma\\sqrt{2\\pi} \\cdot e^{-\\frac{\\omega^2\\sigma^2}{2}}$$"
+      }
+    ],
+    "inverse_fourier": [
+      {
+        "points": 7,
+        "criteria": [
+          {
+            "label": "Tijdverschuiving regel correct geïdentificeerd en toegepast",
+            "points": 4
+          },
+          {
+            "label": "Eindresultaat in tijddomein correct",
+            "points": 3
+          }
+        ],
+        "question": "## Inverse Fouriertransformatie\n\nGegeven het frequentiespectrum:\n$$\\hat{f}(\\omega) = \\frac{4}{4 + \\omega^2} e^{-i2\\omega}$$\n\nGebruik het Fourier paar:\n$$e^{-a|t|} \\Leftrightarrow \\frac{2a}{a^2 + \\omega^2}$$\n\n**(a)** Bepaal welke transformatieregel toegepast moet worden. (4p)\n\n**(b)** Geef het corresponderende tijdsignaal $f(t)$. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Transformatieregel:\n\nSchrijf het spectrum als:\n$$\\hat{f}(\\omega) = \\frac{4}{4 + \\omega^2} \\cdot e^{-i2\\omega}$$\n\nUit het gegeven Fourier paar volgt:\n$$\\frac{4}{4 + \\omega^2} \\Leftrightarrow e^{-2|t|}$$\n\nDe factor $e^{-i2\\omega}$ correspondeert met de **tijdverschuiving regel**:\n$$f(t - t_0) \\Leftrightarrow \\hat{f}(\\omega)e^{-i\\omega t_0}$$\n\nHier is $t_0 = 2$.\n\n**(b)** Tijdsignaal:\n\nDus:\n$$f(t) = e^{-2|t-2|}$$\n\nDit is dezelfde basisvorm, verschoven over 2 eenheden naar rechts."
+      },
+      {
+        "points": 7,
+        "criteria": [
+          {
+            "label": "Schaling regel correct geïdentificeerd en toegepast",
+            "points": 4
+          },
+          {
+            "label": "Eindresultaat in tijddomein correct",
+            "points": 3
+          }
+        ],
+        "question": "## Inverse Fouriertransformatie met schaling\n\nGegeven het frequentiespectrum:\n$$\\hat{f}(\\omega) = \\frac{1}{1 + (\\omega/3)^2}$$\n\nGebruik het Fourier paar:\n$$e^{-a|t|} \\Leftrightarrow \\frac{2a}{a^2 + \\omega^2}$$\n\n**(a)** Bepaal welke transformatieregel toegepast moet worden. (4p)\n\n**(b)** Geef het corresponderende tijdsignaal $f(t)$. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Transformatieregel:\n\nHerschrijf eerst:\n$$\\hat{f}(\\omega) = \\frac{1}{1 + (\\omega/3)^2} = \\frac{9}{9 + \\omega^2}$$\n\nUit het gegeven Fourier paar volgt:\n$$e^{-3|t|} \\Leftrightarrow \\frac{6}{9 + \\omega^2}$$\n\nWe hebben dus een extra factor nodig:\n$$\\frac{9}{9 + \\omega^2} = \\frac{3}{2} \\cdot \\frac{6}{9 + \\omega^2}$$\n\nDe relevante regel is de **schaling regel**:\n$$A f(t) \\Leftrightarrow A \\hat{f}(\\omega)$$\n\n**(b)** Tijdsignaal:\n\nDaarom:\n$$f(t) = \\frac{3}{2}e^{-3|t|}$$\n\nDit is een exponentieel afnemende functie met amplitude $\\frac{3}{2}$."
+      },
+      {
+        "points": 7,
+        "criteria": [
+          {
+            "label": "Toegepaste regels (partiaalbreuken en Fourier paar) correct",
+            "points": 4
+          },
+          {
+            "label": "Eindresultaat in tijddomein correct",
+            "points": 3
+          }
+        ],
+        "question": "## Inverse Fouriertransformatie met partiaalbreuken\n\nGegeven het frequentiespectrum:\n$$\\hat{f}(\\omega) = \\frac{10}{(2 + i\\omega)(5 + i\\omega)}$$\n\nGebruik het Fourier paar:\n$$e^{-at}u(t) \\Leftrightarrow \\frac{1}{a + i\\omega}$$\n\n**(a)** Bepaal welke regels je toepast en werk ze uit. (4p)\n\n**(b)** Geef het corresponderende tijdsignaal $f(t)$. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Toegepaste regels:\n\nWe gebruiken eerst **partiaalbreuken**:\n$$\\frac{10}{(2 + i\\omega)(5 + i\\omega)} = \\frac{A}{2 + i\\omega} + \\frac{B}{5 + i\\omega}$$\n\nMet invullen volgt:\n$$A = \\frac{10}{3}, \\quad B = -\\frac{10}{3}$$\n\nDus:\n$$\\hat{f}(\\omega) = \\frac{10/3}{2 + i\\omega} - \\frac{10/3}{5 + i\\omega}$$\n\nDaarna passen we het gegeven Fourier paar toe:\n$$e^{-at}u(t) \\Leftrightarrow \\frac{1}{a + i\\omega}$$\n\nHieruit volgt:\n- $\\frac{10/3}{2 + i\\omega} \\Leftrightarrow \\frac{10}{3}e^{-2t}u(t)$\n- $\\frac{10/3}{5 + i\\omega} \\Leftrightarrow \\frac{10}{3}e^{-5t}u(t)$\n\n**(b)** Tijdsignaal:\n\nDoor lineairiteit:\n$$f(t) = \\frac{10}{3}e^{-2t}u(t) - \\frac{10}{3}e^{-5t}u(t)$$\n\n$$= \\frac{10}{3}(e^{-2t} - e^{-5t})u(t)$$"
+      }
+    ],
+    "convolutie": [
+      {
+        "points": 9,
+        "criteria": [
+          {
+            "label": "Convolutie integraal correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Fouriertransformaties van beide functies correct",
+            "points": 2
+          },
+          {
+            "label": "Product in frequentiedomein correct berekend",
+            "points": 2
+          },
+          {
+            "label": "Partiaalbreuken correct toegepast",
+            "points": 2
+          },
+          {
+            "label": "Inverse transformatie correct uitgevoerd",
+            "points": 1
+          }
+        ],
+        "question": "## Convolutie met Fouriertransformatie\n\nGegeven zijn twee functies:\n- $f(t) = e^{-2t} u(t)$\n- $g(t) = e^{-3t} u(t)$\n\nwaar $u(t)$ de eenheidsstapfunctie is.\n\n**(a)** Stel de convolutie-integraal $h(t) = f(t) * g(t)$ op. (2p)\n\n**(b)** Bereken $\\hat{f}(\\omega) = \\mathcal{F}\\{f(t)\\}$ en $\\hat{g}(\\omega) = \\mathcal{F}\\{g(t)\\}$. (2p)\n\n**(c)** Gebruik de convolutiestelling om $\\hat{h}(\\omega)$ te vinden. (2p)\n\n**(d)** Bepaal $h(t)$ door inverse transformatie van $\\hat{h}(\\omega)$. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Convolutie-integraal:\n\n$$h(t) = f(t) * g(t) = \\int_{-\\infty}^{\\infty} f(\\tau) g(t-\\tau) \\, d\\tau$$\n\n$$= \\int_{-\\infty}^{\\infty} e^{-2\\tau} u(\\tau) \\cdot e^{-3(t-\\tau)} u(t-\\tau) \\, d\\tau$$\n\n**(b)** Fouriertransformaties:\n\nVoor $f(t) = e^{-2t} u(t)$:\n$$\\hat{f}(\\omega) = \\int_0^{\\infty} e^{-2t} e^{-i\\omega t} \\, dt = \\int_0^{\\infty} e^{-(2+i\\omega)t} \\, dt = \\frac{1}{2 + i\\omega}$$\n\nVoor $g(t) = e^{-3t} u(t)$:\n$$\\hat{g}(\\omega) = \\int_0^{\\infty} e^{-3t} e^{-i\\omega t} \\, dt = \\int_0^{\\infty} e^{-(3+i\\omega)t} \\, dt = \\frac{1}{3 + i\\omega}$$\n\n**(c)** Convolutiestelling:\n\nVolgens de convolutiestelling: $\\mathcal{F}\\{f * g\\} = \\hat{f}(\\omega) \\cdot \\hat{g}(\\omega)$\n\n$$\\hat{h}(\\omega) = \\hat{f}(\\omega) \\cdot \\hat{g}(\\omega) = \\frac{1}{2 + i\\omega} \\cdot \\frac{1}{3 + i\\omega} = \\frac{1}{(2 + i\\omega)(3 + i\\omega)}$$\n\n**(d)** Inverse transformatie:\n\nGebruik partiaalbreuken:\n$$\\frac{1}{(2 + i\\omega)(3 + i\\omega)} = \\frac{A}{2 + i\\omega} + \\frac{B}{3 + i\\omega}$$\n\nVermenigvuldig beide zijden met $(2 + i\\omega)(3 + i\\omega)$:\n$$1 = A(3 + i\\omega) + B(2 + i\\omega)$$\n\nVoor $i\\omega = -2$: $1 = A(1) \\Rightarrow A = 1$\nVoor $i\\omega = -3$: $1 = B(-1) \\Rightarrow B = -1$\n\nDus:\n$$\\hat{h}(\\omega) = \\frac{1}{2 + i\\omega} - \\frac{1}{3 + i\\omega}$$\n\nInverse transformatie:\n$$h(t) = \\mathcal{F}^{-1}\\left\\{\\frac{1}{2 + i\\omega}\\right\\} - \\mathcal{F}^{-1}\\left\\{\\frac{1}{3 + i\\omega}\\right\\}$$\n\n$$= e^{-2t} u(t) - e^{-3t} u(t) = (e^{-2t} - e^{-3t}) u(t)$$"
+      },
+      {
+        "points": 9,
+        "criteria": [
+          {
+            "label": "Convolutie integraal correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Laplacetransformaties van beide functies correct",
+            "points": 2
+          },
+          {
+            "label": "Product in s-domein correct berekend",
+            "points": 2
+          },
+          {
+            "label": "Partiaalbreuken correct toegepast",
+            "points": 2
+          },
+          {
+            "label": "Inverse Laplace transformatie correct uitgevoerd",
+            "points": 1
+          }
+        ],
+        "question": "## Convolutie met Laplacetransformatie\n\nGegeven zijn twee functies:\n- $f(t) = te^{-t} u(t)$\n- $g(t) = e^{-2t} u(t)$\n\nwaar $u(t)$ de eenheidsstapfunctie is.\n\n**(a)** Stel de convolutie-integraal $h(t) = f(t) * g(t)$ op. (2p)\n\n**(b)** Bereken $\\mathcal{L}\\{f(t)\\}$ en $\\mathcal{L}\\{g(t)\\}$. (2p)\n\n**(c)** Gebruik de convolutiestelling om $\\mathcal{L}\\{h(t)\\}$ te vinden. (2p)\n\n**(d)** Bepaal $h(t)$ door inverse Laplace transformatie. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Convolutie-integraal:\n\n$$h(t) = f(t) * g(t) = \\int_{-\\infty}^{\\infty} f(\\tau) g(t-\\tau) \\, d\\tau$$\n\n$$= \\int_0^t \\tau e^{-\\tau} \\cdot e^{-2(t-\\tau)} \\, d\\tau = e^{-2t} \\int_0^t \\tau e^{\\tau} \\, d\\tau$$\n\n**(b)** Laplacetransformaties:\n\nVoor $f(t) = te^{-t} u(t)$:\n$$\\mathcal{L}\\{f(t)\\} = \\mathcal{L}\\{te^{-t}\\} = \\frac{1}{(s+1)^2}$$\n\nVoor $g(t) = e^{-2t} u(t)$:\n$$\\mathcal{L}\\{g(t)\\} = \\mathcal{L}\\{e^{-2t}\\} = \\frac{1}{s+2}$$\n\n**(c)** Convolutiestelling:\n\nVolgens de convolutiestelling: $\\mathcal{L}\\{f * g\\} = \\mathcal{L}\\{f\\} \\cdot \\mathcal{L}\\{g\\}$\n\n$$\\mathcal{L}\\{h(t)\\} = \\frac{1}{(s+1)^2} \\cdot \\frac{1}{s+2} = \\frac{1}{(s+1)^2(s+2)}$$\n\n**(d)** Inverse Laplace transformatie:\n\nGebruik partiaalbreuken:\n$$\\frac{1}{(s+1)^2(s+2)} = \\frac{A}{s+1} + \\frac{B}{(s+1)^2} + \\frac{C}{s+2}$$\n\nVermenigvuldig met $(s+1)^2(s+2)$:\n$$1 = A(s+1)(s+2) + B(s+2) + C(s+1)^2$$\n\nVoor $s = -1$: $1 = B(1) \\Rightarrow B = 1$\nVoor $s = -2$: $1 = C(1) \\Rightarrow C = 1$\nVoor $s = 0$: $1 = 2A + 2B + C = 2A + 2 + 1 \\Rightarrow A = -1$\n\nDus:\n$$\\mathcal{L}\\{h(t)\\} = \\frac{-1}{s+1} + \\frac{1}{(s+1)^2} + \\frac{1}{s+2}$$\n\nInverse transformatie:\n$$h(t) = -e^{-t} + te^{-t} + e^{-2t} = (-1 + t)e^{-t} + e^{-2t}$$\n\n$$= (t-1)e^{-t} + e^{-2t}$$"
+      },
+      {
+        "points": 9,
+        "criteria": [
+          {
+            "label": "Convolutie integraal correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Integratie grenzen correct bepaald",
+            "points": 2
+          },
+          {
+            "label": "Partiële integratie correct uitgevoerd",
+            "points": 3
+          },
+          {
+            "label": "Eindresultaat correct",
+            "points": 2
+          }
+        ],
+        "question": "## Directe convolutie berekening\n\nGegeven zijn twee exponentiële functies:\n- $f(t) = e^{-t} u(t)$\n- $g(t) = e^{-2t} u(t)$\n\nwaar $u(t)$ de eenheidsstapfunctie is.\n\n**(a)** Stel de convolutie-integraal $h(t) = f(t) * g(t)$ op. (3p)\n\n**(b)** Bereken de convolutie direct door integratie. (4p)\n\n**(c)** Vereenvoudig het eindresultaat. (2p)",
+        "answer": "## Oplossing\n\n**(a)** Convolutie-integraal:\n\n$$h(t) = f(t) * g(t) = \\int_{-\\infty}^{\\infty} f(\\tau) g(t-\\tau) \\, d\\tau$$\n\n$$= \\int_0^t e^{-\\tau} e^{-2(t-\\tau)} u(t-\\tau) \\, d\\tau$$\n\nOmdat beide functies nul zijn voor $t < 0$, hebben we voor $t \\geq 0$:\n\n$$h(t) = \\int_0^t e^{-\\tau} e^{-2(t-\\tau)} \\, d\\tau$$\n\n**(b)** Berekening van de integraal:\n\n$$h(t) = \\int_0^t e^{-\\tau} e^{-2t + 2\\tau} \\, d\\tau = e^{-2t} \\int_0^t e^{\\tau} \\, d\\tau$$\n\n$$= e^{-2t} \\left[ e^{\\tau} \\right]_0^t = e^{-2t} (e^t - 1)$$\n\n**(c)** Vereenvoudiging:\n\n$$h(t) = e^{-2t}(e^t - 1) = e^{-t} - e^{-2t}$$\n\nEindresultaat:\n$$h(t) = \\begin{cases} \n0 & \\text{als } t < 0 \\\\\ne^{-t} - e^{-2t} & \\text{als } t \\geq 0\n\\end{cases}$$"
+      },
+      {
+        "points": 9,
+        "criteria": [
+          {
+            "label": "Convolutie-integraal en grenzen correct opgesteld",
+            "points": 3
+          },
+          {
+            "label": "Integratie correct uitgevoerd per interval",
+            "points": 3
+          },
+          {
+            "label": "Eindresultaat correct en volledig",
+            "points": 3
+          }
+        ],
+        "question": "## Directe convolutie\n\nBereken de convolutie $h(t) = f(t) * g(t)$ voor:\n$$f(t) = e^{-t}\\, u(t), \\qquad g(t) = e^{-2t}\\, u(t)$$\n\nGeef het eindresultaat voor alle $t$.",
+        "answer": "## Oplossing\n\nDe convolutie-integraal voor $t \\geq 0$:\n$$h(t) = \\int_0^t e^{-\\tau} \\cdot e^{-2(t-\\tau)}\\, d\\tau = e^{-2t} \\int_0^t e^{\\tau}\\, d\\tau$$\n\n$$= e^{-2t}\\bigl[e^{\\tau}\\bigr]_0^t = e^{-2t}(e^t - 1) = e^{-t} - e^{-2t}$$\n\nVoor $t < 0$ zijn beide functies nul, dus $h(t) = 0$.\n\n$$\\boxed{h(t) = (e^{-t} - e^{-2t})\\, u(t)}$$"
+      }
+    ],
+    "filters": [
+      {
+        "points": 5,
+        "criteria": [
+          {
+            "label": "Correct filtertype geïdentificeerd",
+            "points": 2
+          },
+          {
+            "label": "Keuze duidelijk gemotiveerd",
+            "points": 3
+          }
+        ],
+        "question": "## Filterselectie voor audiosignalen\n\nTijdens de opname van klassieke muziek is er storing opgetreden door een 50 Hz bromtoon van de netfrequentie. Het muzieksignaal bevat informatie van 20 Hz tot 20 kHz.\n\nWelk filter is hiervoor geschikt? Leg uit waarom je voor dit type filter hebt gekozen.",
+        "answer": "## Oplossing\n\nEen **notch filter** (band-stop filter) is het meest geschikt. Dit filter blokkeert een smal frequentiebereik rond 50 Hz terwijl alle andere frequenties — inclusief het volledige muziekspectrum van 20 Hz tot 20 kHz — ongestoord doorgelaten worden.\n\nEen low-pass of high-pass filter zou grote delen van het muziekspectrum weggooien. Een breed band-stop filter verwijdert ook nuttige tonen rond 50 Hz. Alleen een smalle notch filter verwijdert selectief de storing zonder de muziek te verminken."
+      },
+      {
+        "points": 5,
+        "criteria": [
+          {
+            "label": "Correct filtertype geïdentificeerd",
+            "points": 2
+          },
+          {
+            "label": "Keuze duidelijk gemotiveerd",
+            "points": 3
+          }
+        ],
+        "question": "## Filterselectie voor spraakverwerking\n\nEen speech-to-text systeem heeft last van achtergrondlawaai. Menselijke spraak heeft energie tussen 300 Hz en 3400 Hz. Het achtergrondlawaai bevindt zich onder 200 Hz en boven 4000 Hz.\n\nWelk filter is hiervoor geschikt? Leg uit waarom je voor dit type filter hebt gekozen.",
+        "answer": "## Oplossing\n\nEen **band-pass filter** met grenzen bij 300 Hz en 3400 Hz is het meest geschikt. Dit filter laat precies het spraakspectrum door en blokkeert zowel het lage ruis (< 200 Hz) als het hoge ruis (> 4000 Hz) in één stap.\n\nEen low-pass filter lost alleen het hoge ruis op, een high-pass filter alleen het lage ruis. Een notch filter blokkeert maar een smalle band en is daarvoor ongeschikt. Een band-stop filter is het omgekeerde van wat nodig is."
+      },
+      {
+        "points": 5,
+        "criteria": [
+          {
+            "label": "Correct filtertype geïdentificeerd",
+            "points": 2
+          },
+          {
+            "label": "Keuze duidelijk gemotiveerd",
+            "points": 3
+          }
+        ],
+        "question": "## Filterselectie voor ECG-signaalverwerking\n\nEen ECG-monitor meet hartsignalen in het bereik 0.5 Hz – 100 Hz. Het systeem heeft last van twee problemen: ademhaling-artefacten onder 0.5 Hz en spierspanning-interferentie boven 150 Hz.\n\nWelk filter is hiervoor geschikt? Leg uit waarom je voor dit type filter hebt gekozen.",
+        "answer": "## Oplossing\n\nEen **band-pass filter** met grenzen bij 0.5 Hz en 100 Hz is het meest geschikt. Dit filter laat het volledige ECG-bereik door en filtert in één keer zowel de lage ademhaling-artefacten (< 0.5 Hz) als de hoge EMG-interferentie (> 150 Hz) weg.\n\nEen high-pass filter verwijdert alleen de ademhaling-storing, een low-pass filter alleen de EMG-storing. Beide lossen slechts de helft van het probleem op. Een notch filter is ongeschikt omdat de storing geen smalle piek is maar een breed frequentiegebied beslaat."
+      },
+      {
+        "points": 5,
+        "criteria": [
+          {
+            "label": "Correct filtertype geïdentificeerd",
+            "points": 2
+          },
+          {
+            "label": "Keuze duidelijk gemotiveerd",
+            "points": 3
+          }
+        ],
+        "question": "## Filterselectie voor anti-aliasing\n\nEen data-acquisitiesysteem meet vibratiesignalen tot 2 kHz en digitaliseert met 5 kHz samplefrequentie. Er zijn ongewenste mechanische resonanties aanwezig bij 8–12 kHz die aliasing kunnen veroorzaken.\n\nWelk filter is hiervoor geschikt? Leg uit waarom je voor dit type filter hebt gekozen.",
+        "answer": "## Oplossing\n\nEen **low-pass filter** (anti-aliasing filter) met een afsnijfrequentie rond 2–2.5 kHz is vereist. De Nyquist-frequentie is $f_s/2 = 2500$ Hz. Signalen boven deze grens zullen als aliassen terugvouwen in het nuttige bereik. Het low-pass filter blokkeert de resonanties bij 8–12 kHz vóór de bemonstering, zodat geen aliasing kan optreden.\n\nEen high-pass, band-pass of notch filter laat de hoge resonanties (gedeeltelijk) door en lost het aliasing-probleem niet op."
+      }
+    ],
+    "laplace": [
+      {
+        "points": 9,
+        "criteria": [
+          {
+            "label": "Laplace-definitie correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Integraal correct berekend",
+            "points": 4
+          },
+          {
+            "label": "Eindresultaat correct vereenvoudigd",
+            "points": 3
+          }
+        ],
+        "question": "## Laplacetransformatie van exponentiële functie\n\nGegeven is de functie:\n$$f(t) = e^{-3t} u(t)$$\n\nwaarbij $u(t)$ de eenheidsstapfunctie is.\n\n**(a)** Schrijf de Laplacetransformatie als integraal op:\n$$\\mathcal{L}\\{f(t)\\} = \\int_0^{\\infty} e^{-3t} e^{-st} \\, dt$$ (2p)\n\n**(b)** Vereenvoudig de integraal en bereken het resultaat. (4p)\n\n**(c)** Geef het eindresultaat in de vorm $F(s) = \\ldots$ (3p)",
+        "answer": "## Oplossing\n\n**(a)** Laplacetransformatie integraal:\n\n$$\\mathcal{L}\\{f(t)\\} = \\int_0^{\\infty} e^{-3t} e^{-st} \\, dt$$\n\n**(b)** Vereenvoudiging en berekening:\n\nCombineer de exponentialen:\n$$\\mathcal{L}\\{f(t)\\} = \\int_0^{\\infty} e^{-(s+3)t} \\, dt$$\n\nIntegreer:\n$$= \\left[ \\frac{e^{-(s+3)t}}{-(s+3)} \\right]_0^{\\infty}$$\n\n$$= \\frac{1}{-(s+3)} \\left[ e^{-(s+3) \\cdot \\infty} - e^0 \\right]$$\n\nVoor $\\text{Re}(s) > -3$ gaat $e^{-(s+3)t} \\to 0$ als $t \\to \\infty$:\n\n$$= \\frac{1}{-(s+3)} [0 - 1] = \\frac{1}{s+3}$$\n\n**(c)** Eindresultaat:\n\n$$F(s) = \\mathcal{L}\\{e^{-3t}u(t)\\} = \\frac{1}{s+3}$$"
+      },
+      {
+        "points": 9,
+        "criteria": [
+          {
+            "label": "Laplacedefinitie correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Partiële integratie correct toegepast",
+            "points": 4
+          },
+          {
+            "label": "Eindresultaat correct",
+            "points": 3
+          }
+        ],
+        "question": "## Laplacetransformatie met partiële integratie\n\nGegeven is de functie:\n$$f(t) = t e^{-2t} u(t)$$\n\nwaarbij $u(t)$ de eenheidsstapfunctie is.\n\n**(a)** Schrijf de Laplacetransformatie als integraal op. (2p)\n\n**(b)** Pas partiële integratie toe om het resultaat te vinden. (4p)Kies $u = t$ en $dv = e^{-(s+2)t} dt$\n\n**(c)** Geef het eindresultaat in de vorm $F(s) = \\ldots$ (3p)",
+        "answer": "## Oplossing\n\n**(a)** Laplacetransformatie integraal:\n\n$$\\mathcal{L}\\{f(t)\\} = \\int_0^{\\infty} t e^{-2t} e^{-st} \\, dt = \\int_0^{\\infty} t e^{-(s+2)t} \\, dt$$\n\n**(b)** Partiële integratie:\n\nStel $u = t$ en $dv = e^{-(s+2)t} dt$\n\nDan $du = dt$ en $v = \\frac{e^{-(s+2)t}}{-(s+2)}$\n\n$$\\mathcal{L}\\{f(t)\\} = \\left[ t \\cdot \\frac{e^{-(s+2)t}}{-(s+2)} \\right]_0^{\\infty} - \\int_0^{\\infty} \\frac{e^{-(s+2)t}}{-(s+2)} \\, dt$$\n\nDe grensterm is nul (omdat $t \\cdot e^{-(s+2)t} \\to 0$ als $t \\to \\infty$ voor $\\text{Re}(s) > -2$):\n\n$$= 0 + \\frac{1}{s+2} \\int_0^{\\infty} e^{-(s+2)t} \\, dt$$\n\n$$= \\frac{1}{s+2} \\left[ \\frac{e^{-(s+2)t}}{-(s+2)} \\right]_0^{\\infty}$$\n\n$$= \\frac{1}{s+2} \\cdot \\frac{1}{s+2} = \\frac{1}{(s+2)^2}$$\n\n**(c)** Eindresultaat:\n\n$$F(s) = \\mathcal{L}\\{t e^{-2t}u(t)\\} = \\frac{1}{(s+2)^2}$$"
+      },
+      {
+        "points": 8,
+        "criteria": [
+          {
+            "label": "Piecewise integraal correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Integraal voor beide intervallen correct berekend",
+            "points": 4
+          },
+          {
+            "label": "Eindresultaat correct vereenvoudigd",
+            "points": 2
+          }
+        ],
+        "question": "## Laplacetransformatie van stuksgewijze functie\n\nGegeven is de piecewise functie:\n$$f(t) = \\begin{cases} 1 & \\text{als } 0 \\leq t < 2 \\\\ 0 & \\text{als } t \\geq 2 \\end{cases}$$\n\nDit kan ook geschreven worden als $f(t) = u(t) - u(t-2)$.\n\n**(a)** Splits de Laplacetransformatie in twee integralen. (2p)\n\n**(b)** Bereken beide integralen. (4p)\n\n**(c)** Geef het eindresultaat in de vorm $F(s) = \\ldots$ (2p)",
+        "answer": "## Oplossing\n\n**(a)** Laplacetransformatie als twee integralen:\n\n$$\\mathcal{L}\\{f(t)\\} = \\int_0^{\\infty} f(t) e^{-st} \\, dt$$\n\n$$= \\int_0^2 1 \\cdot e^{-st} \\, dt + \\int_2^{\\infty} 0 \\, dt$$\n\n$$= \\int_0^2 e^{-st} \\, dt$$\n\n**(b)** Berekening van de integraal:\n\n$$\\mathcal{L}\\{f(t)\\} = \\left[ \\frac{e^{-st}}{-s} \\right]_0^2$$\n\n$$= \\frac{e^{-2s}}{-s} - \\frac{e^0}{-s}$$\n\n$$= \\frac{e^{-2s}}{-s} + \\frac{1}{s}$$\n\n$$= \\frac{1 - e^{-2s}}{s}$$\n\n**(c)** Eindresultaat:\n\n$$F(s) = \\mathcal{L}\\{f(t)\\} = \\frac{1 - e^{-2s}}{s}$$"
+      },
+      {
+        "points": 8,
+        "criteria": [
+          {
+            "label": "Laplacedefinitie correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Integraalberekening correct",
+            "points": 3
+          },
+          {
+            "label": "Vereenvoudiging met exponentieel en sinus correct",
+            "points": 2
+          },
+          {
+            "label": "Eindresultaat correct",
+            "points": 1
+          }
+        ],
+        "question": "## Laplacetransformatie van gedempt harmonisch signaal\n\nGegeven is de functie:\n$$f(t) = e^{-t} \\sin(2t) u(t)$$\n\nwaarbij $u(t)$ de eenheidsstapfunctie is.\n\n**(a)** Schrijf de Laplacetransformatie als integraal op. (2p)\n\n**(b)** Gebruik de identiteit $\\sin(2t) = \\frac{e^{2it} - e^{-2it}}{2i}$ en combineer met de exponentiële factor. (3p)\n\n**(c)** Bereken het resultaat. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Laplacetransformatie integraal:\n\n$$\\mathcal{L}\\{f(t)\\} = \\int_0^{\\infty} e^{-t} \\sin(2t) e^{-st} \\, dt$$\n\n$$= \\int_0^{\\infty} \\sin(2t) e^{-(s+1)t} \\, dt$$\n\n**(b)** Gebruik van de complexe identiteit:\n\n$$\\sin(2t) = \\frac{e^{2it} - e^{-2it}}{2i}$$\n\n$$\\mathcal{L}\\{f(t)\\} = \\int_0^{\\infty} \\frac{e^{2it} - e^{-2it}}{2i} e^{-(s+1)t} \\, dt$$\n\n$$= \\frac{1}{2i} \\left[ \\int_0^{\\infty} e^{(2i-s-1)t} \\, dt - \\int_0^{\\infty} e^{(-2i-s-1)t} \\, dt \\right]$$\n\n**(c)** Berekening van beide integralen:\n\n$$\\int_0^{\\infty} e^{(2i-s-1)t} \\, dt = \\frac{1}{-2i-s-1} = \\frac{1}{-(s+1)-2i}$$\n\n$$\\int_0^{\\infty} e^{(-2i-s-1)t} \\, dt = \\frac{1}{2i-s-1} = \\frac{1}{-(s+1)+2i}$$\n\n$$\\mathcal{L}\\{f(t)\\} = \\frac{1}{2i} \\left[ \\frac{-1}{(s+1)+2i} - \\frac{-1}{(s+1)-2i} \\right]$$\n\n$$= \\frac{1}{2i} \\left[ \\frac{-1}{(s+1)+2i} + \\frac{1}{(s+1)-2i} \\right]$$\n\nNa vereenvoudiging (met gemeenschappelijke noemer en herkennen van het patroon):\n\n$$F(s) = \\mathcal{L}\\{e^{-t}\\sin(2t)u(t)\\} = \\frac{2}{(s+1)^2 + 4}$$"
+      }
+    ],
+    "pde": [
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Fouriertransformatie correct toegepast op PDE",
+            "points": 2
+          },
+          {
+            "label": "Transformatieregels voor afgeleiden correct gebruikt",
+            "points": 2
+          },
+          {
+            "label": "Resulterende GDV in ω-domein correct opgelost",
+            "points": 2
+          },
+          {
+            "label": "Beginvoorwaarden correct toegepast",
+            "points": 2
+          },
+          {
+            "label": "Inverse transformatie correct uitgevoerd",
+            "points": 2
+          }
+        ],
+        "question": "## PDV oplossen met Fouriertransformatie\n\nGegeven de warmtevergelijking:\n$$\\frac{\\partial u}{\\partial t} = k \\frac{\\partial^2 u}{\\partial x^2}$$\n\nmet beginvoorwaarde $u(x,0) = e^{-|x|}$ en $k = 1$.\n\n**(a)** Pas Fouriertransformatie toe naar de x-variabele. (2p)\n\n**(b)** Gebruik de transformatieregels voor afgeleiden. (2p)\n\n**(c)** Los de resulterende GDV op voor $U(\\omega,t)$. (2p)\n\n**(d)** Pas de beginvoorwaarde toe. (2p)\n\n**(e)** Bepaal $u(x,t)$ door inverse transformatie. (2p)",
+        "answer": "## Oplossing\n\n**(a)** Fouriertransformatie toepassing:\n\nDefinieer $U(\\omega,t) = \\mathcal{F}_x\\{u(x,t)\\}$ waar de subscript $x$ aangeeft dat we transformeren naar de $x$-variabele.\n\nDe PDE wordt:\n$$\\mathcal{F}_x\\left\\{\\frac{\\partial u}{\\partial t}\\right\\} = \\mathcal{F}_x\\left\\{\\frac{\\partial^2 u}{\\partial x^2}\\right\\}$$\n\n**(b)** Transformatieregels voor afgeleiden:\n\n- $\\mathcal{F}_x\\left\\{\\frac{\\partial u}{\\partial t}\\right\\} = \\frac{\\partial U}{\\partial t}$ (tijd is parameter)\n- $\\mathcal{F}_x\\left\\{\\frac{\\partial^2 u}{\\partial x^2}\\right\\} = (i\\omega)^2 U(\\omega,t) = -\\omega^2 U(\\omega,t)$\n\nDe getransformeerde PDE wordt:\n$$\\frac{\\partial U}{\\partial t} = -\\omega^2 U(\\omega,t)$$\n\n**(c)** GDV oplossen:\n\nDit is een eerste-orde lineaire GDV in $t$:\n$$\\frac{dU}{dt} + \\omega^2 U = 0$$\n\nDe oplossing is:\n$$U(\\omega,t) = C(\\omega) e^{-\\omega^2 t}$$\n\nwaar $C(\\omega)$ wordt bepaald door de beginvoorwaarde.\n\n**(d)** Beginvoorwaarde toepassen:\n\nBij $t = 0$: $U(\\omega,0) = C(\\omega) = \\mathcal{F}_x\\{u(x,0)\\} = \\mathcal{F}_x\\{e^{-|x|}\\}$\n\nDe Fouriertransformatie van $e^{-|x|}$ is:\n$$\\mathcal{F}_x\\{e^{-|x|}\\} = \\frac{2}{1 + \\omega^2}$$\n\nDus: $C(\\omega) = \\frac{2}{1 + \\omega^2}$\n\nEn: $U(\\omega,t) = \\frac{2}{1 + \\omega^2} e^{-\\omega^2 t}$\n\n**(e)** Inverse transformatie:\n\n$$u(x,t) = \\mathcal{F}^{-1}\\left\\{\\frac{2e^{-\\omega^2 t}}{1 + \\omega^2}\\right\\}$$\n\nDit kan worden opgelost door convolutie, maar het exacte resultaat is:\n\n$$u(x,t) = \\frac{1}{\\sqrt{\\pi t}} \\int_{-\\infty}^{\\infty} e^{-|\\xi|} e^{-\\frac{(x-\\xi)^2}{4t}} \\, d\\xi$$\n\nDit beschrijft de diffusie van de initiële puls $e^{-|x|}$ volgens de warmtevergelijking."
+      },
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Separatie van variabelen correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Randvoorwaarden correct toegepast",
+            "points": 2
+          },
+          {
+            "label": "Eigenwaarden en eigenfuncties correct afgeleid",
+            "points": 2
+          },
+          {
+            "label": "Temporale GDV correct opgelost",
+            "points": 2
+          },
+          {
+            "label": "Beginvoorwaarden correct geïmplementeerd",
+            "points": 2
+          }
+        ],
+        "question": "## PDV oplossen met separatie van variabelen\n\nGegeven de golffunctie:\n$$\\frac{\\partial^2 u}{\\partial t^2} = c^2 \\frac{\\partial^2 u}{\\partial x^2}$$\n\nmet randvoorwaarden $u(0,t) = 0$, $u(L,t) = 0$ (ingespannen uiteinden)\n\nen beginvoorwaarden $u(x,0) = \\sin\\left(\\frac{\\pi x}{L}\\right)$ en $\\frac{\\partial u}{\\partial t}\\bigg|_{t=0} = 0$ (geen beginsnelheid)\n\nGebruik $L = \\pi$ en $c = 1$.\n\n**(a)** Stel met separatie van variabelen op: $u(x,t) = X(x)T(t)$. (2p)\n\n**(b)** Pas randvoorwaarden toe om eigenwaarden te vinden. (2p)\n\n**(c)** Bepaal de eigenfuncties $X_n(x)$ en los $T_n(t)$ op. (3p)\n\n**(d)** Pas beginvoorwaarden toe om integratie-constanten te bepalen. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Separatie van variabelen:\n\nStel $u(x,t) = X(x)T(t)$. Substitutie in de PDE geeft:\n\n$$X(x)T''(t) = X''(x)T(t)$$\n\nDelen door $X(x)T(t)$:\n\n$$\\frac{T''(t)}{T(t)} = \\frac{X''(x)}{X(x)} = -\\lambda$$\n\nwaar $-\\lambda$ een separatieconstante is.\n\nDit geeft twee ODE's:\n$$X''(x) + \\lambda X(x) = 0$$\n$$T''(t) + \\lambda T(t) = 0$$\n\n**(b)** Randvoorwaarden toepassen:\n\nUit $u(0,t) = X(0)T(t) = 0$ volgt $X(0) = 0$\n\nUit $u(\\pi,t) = X(\\pi)T(t) = 0$ volgt $X(\\pi) = 0$\n\nDus we hebben het eigenwaarde probleem:\n$$X''(x) + \\lambda X(x) = 0, \\quad X(0) = 0, \\quad X(\\pi) = 0$$\n\nDe algemene oplossing is $X(x) = A\\sin(\\sqrt{\\lambda}x) + B\\cos(\\sqrt{\\lambda}x)$\n\nUit $X(0) = 0$: $B = 0$\n\nUit $X(\\pi) = 0$: $A\\sin(\\sqrt{\\lambda}\\pi) = 0$\n\nVoor niet-triviale oplossing: $\\sqrt{\\lambda}\\pi = n\\pi$ met $n = 1,2,3,...$\n\nEigenwaarden: $\\lambda_n = n^2$\n\n**(c)** Eigenfuncties en temporale oplossing:\n\nEigenfuncties:\n$$X_n(x) = \\sin(nx)$$\n\nVoor $T_n(t)$:\n$$T_n''(t) + n^2 T_n(t) = 0$$\n\nAlgemene oplossing:\n$$T_n(t) = A_n \\cos(nt) + B_n \\sin(nt)$$\n\nAlgemene oplossing van de PDE:\n$$u(x,t) = \\sum_{n=1}^{\\infty} [A_n \\cos(nt) + B_n \\sin(nt)] \\sin(nx)$$\n\n**(d)** Beginvoorwaarden toepassen:\n\nUit $u(x,0) = \\sin(\\pi x/\\pi) = \\sin(x)$:\n\n$$\\sin(x) = \\sum_{n=1}^{\\infty} A_n \\sin(nx)$$\n\nDoor orthogonaliteit: $A_1 = 1$ en $A_n = 0$ voor $n > 1$\n\nUit $\\frac{\\partial u}{\\partial t}\\bigg|_{t=0} = 0$:\n\n$$\\frac{\\partial u}{\\partial t}\\bigg|_{t=0} = \\sum_{n=1}^{\\infty} [-A_n n \\sin(nt) + B_n n \\cos(nt)] \\sin(nx)\\bigg|_{t=0}$$\n\n$$= \\sum_{n=1}^{\\infty} B_n n \\sin(nx) = 0$$\n\nDus $B_n = 0$ voor alle $n$.\n\n**Eindoplossing:**\n$$u(x,t) = \\cos(t) \\sin(x)$$"
+      },
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Laplacetransformatie correct toegepast op tijd",
+            "points": 2
+          },
+          {
+            "label": "Resulterende ODE in x correct opgelost",
+            "points": 2
+          },
+          {
+            "label": "Randvoorwaarden correct toegepast",
+            "points": 2
+          },
+          {
+            "label": "Inverse Laplacetransformatie correct uitgevoerd",
+            "points": 2
+          },
+          {
+            "label": "Eindoplossing correct geformuleerd",
+            "points": 2
+          }
+        ],
+        "question": "## PDV oplossen met Laplacetransformatie\n\nGegeven de 1D warmtevergelijking:\n$$\\frac{\\partial u}{\\partial t} = \\alpha \\frac{\\partial^2 u}{\\partial x^2}$$\n\nmet randvoorwaarden $u(0,t) = T_0$, $u(L,t) = 0$ en beginvoorwaarde $u(x,0) = 0$.\n\nGebruik $\\alpha = 1$, $T_0 = 100$, en $L = 1$.\n\n**(a)** Pas Laplacetransformatie toe naar de tijdvariabele. (2p)\n\n**(b)** Los de resulterende ODE in $x$ op. (2p)\n\n**(c)** Pas de randvoorwaarden toe om constanten te bepalen. (2p)\n\n**(d)** Voer inverse Laplacetransformatie uit. (2p)\n\n**(e)** Interpreteer de fysieke betekenis van de oplossing. (2p)",
+        "answer": "## Oplossing\n\n**(a)** Laplacetransformatie toepassing:\n\nDefinieer $U(x,s) = \\mathcal{L}_t\\{u(x,t)\\} = \\int_0^{\\infty} u(x,t) e^{-st} \\, dt$\n\nPas Laplacetransformatie toe op de PDE:\n$$\\mathcal{L}_t\\left\\{\\frac{\\partial u}{\\partial t}\\right\\} = \\mathcal{L}_t\\left\\{\\frac{\\partial^2 u}{\\partial x^2}\\right\\}$$\n\nGebruik de eigenschap $\\mathcal{L}_t\\left\\{\\frac{\\partial u}{\\partial t}\\right\\} = sU(x,s) - u(x,0)$ en $u(x,0) = 0$:\n\n$$sU(x,s) = \\frac{\\partial^2 U}{\\partial x^2}$$\n\nDit herschrijf tot:\n$$\\frac{d^2 U}{dx^2} - sU = 0$$\n\n**(b)** ODE oplossen:\n\nDe karakteristieke vergelijking is $r^2 - s = 0$, dus $r = \\pm\\sqrt{s}$.\n\nDe algemene oplossing is:\n$$U(x,s) = A e^{\\sqrt{s}x} + B e^{-\\sqrt{s}x}$$\n\n**(c)** Randvoorwaarden toepassen:\n\n**Bij $x = 0$:** $U(0,s) = \\mathcal{L}_t\\{u(0,t)\\} = \\mathcal{L}_t\\{T_0\\} = \\mathcal{L}_t\\{100\\} = \\frac{100}{s}$\n\nDus: $A + B = \\frac{100}{s}$\n\n**Bij $x = 1$:** $U(1,s) = \\mathcal{L}_t\\{u(1,t)\\} = \\mathcal{L}_t\\{0\\} = 0$\n\nDus: $A e^{\\sqrt{s}} + B e^{-\\sqrt{s}} = 0$\n\nUit de tweede vergelijking: $A = -B \\frac{e^{-\\sqrt{s}}}{e^{\\sqrt{s}}} = -B e^{-2\\sqrt{s}}$\n\nSubstitutie in de eerste:\n$$-B e^{-2\\sqrt{s}} + B = \\frac{100}{s}$$\n\n$$B(1 - e^{-2\\sqrt{s}}) = \\frac{100}{s}$$\n\n$$B = \\frac{100}{s(1 - e^{-2\\sqrt{s}})}$$\n\n$$A = -\\frac{100 e^{-2\\sqrt{s}}}{s(1 - e^{-2\\sqrt{s}})}$$\n\nDus:\n$$U(x,s) = \\frac{100}{s(1 - e^{-2\\sqrt{s}})} \\left[-e^{-2\\sqrt{s}} e^{\\sqrt{s}x} + e^{-\\sqrt{s}x}\\right]$$\n\n$$= \\frac{100}{s(1 - e^{-2\\sqrt{s}})} e^{-\\sqrt{s}x} \\left[1 - e^{-\\sqrt{s}(2-x)}\\right]$$\n\n**(d)** Inverse Laplacetransformatie:\n\nDeze vorm kan ontwikkeld worden in een reeks:\n$$\\frac{1}{1 - e^{-2\\sqrt{s}}} = \\sum_{n=0}^{\\infty} e^{-2n\\sqrt{s}}$$\n\nDit geeft na inverse transformatie:\n$$u(x,t) = \\frac{100(1-x)}{1} - \\frac{200}{\\pi} \\sum_{n=1}^{\\infty} \\frac{\\sin(n\\pi x)}{n} e^{-n^2\\pi^2 t}$$\n\n**(e)** Fysieke interpretatie:\n\nDe oplossing beschrijft warmtegeleiding in een staaf:\n- Links wordt constant temperatuur $T_0 = 100$ aangehouden\n- Rechts wordt temperatuur 0 aangehouden\n- Aanvankelijk is de hele staaf koud ($u(x,0) = 0$)\n- Door tijd heen ontstaat een lineair temperatuursprofiel $100(1-x)$ als steady-state\n- De exponentiele termen vertegenwoordigen transiënte effecten die snel wegvallen"
+      },
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Separatie van variabelen correct opgesteld",
+            "points": 3
+          },
+          {
+            "label": "Eigenwaarden en eigenfuncties correct bepaald",
+            "points": 3
+          },
+          {
+            "label": "Beginvoorwaarde toegepast en eindoplossing correct",
+            "points": 4
+          }
+        ],
+        "question": "## PDV oplossen met separatie van variabelen\n\nGegeven de warmtevergelijking:\n$$\\frac{\\partial u}{\\partial t} = \\frac{\\partial^2 u}{\\partial x^2}$$\n\nop $0 \\leq x \\leq \\pi$, met randvoorwaarden $u(0,t) = 0$ en $u(\\pi,t) = 0$, en beginvoorwaarde $u(x,0) = \\sin(2x)$.\n\nGebruik separatie van variabelen om de oplossing $u(x,t)$ te vinden.",
+        "answer": "## Oplossing\n\nStel $u(x,t) = X(x)T(t)$. Substitutie in de PDE geeft:\n\n$$X(x)T'(t) = X''(x)T(t)$$\n\nDelen door $X(x)T(t)$:\n\n$$\\frac{T'(t)}{T(t)} = \\frac{X''(x)}{X(x)} = -\\lambda$$\n\nDit geeft twee ODE's:\n$$X''(x) + \\lambda X(x) = 0, \\quad X(0) = 0, \\quad X(\\pi) = 0$$\n$$T'(t) + \\lambda T(t) = 0$$\n\n**Eigenwaarden:** De algemene oplossing van de $X$-vergelijking is $X(x) = A\\cos(\\sqrt{\\lambda}\\,x) + B\\sin(\\sqrt{\\lambda}\\,x)$.\n\nUit $X(0) = 0$: $A = 0$. Uit $X(\\pi) = 0$: $\\sin(\\sqrt{\\lambda}\\,\\pi) = 0$, dus $\\sqrt{\\lambda} = n$ met $n = 1, 2, 3, \\ldots$\n\nEigenwaarden: $\\lambda_n = n^2$, eigenfuncties: $X_n(x) = \\sin(nx)$\n\n**Tijdsfactor:** $T_n'(t) + n^2 T_n(t) = 0 \\Rightarrow T_n(t) = e^{-n^2 t}$\n\n**Algemene oplossing:**\n$$u(x,t) = \\sum_{n=1}^{\\infty} c_n \\sin(nx)\\, e^{-n^2 t}$$\n\n**Beginvoorwaarde:** $u(x,0) = \\sin(2x)$ geeft:\n$$\\sum_{n=1}^{\\infty} c_n \\sin(nx) = \\sin(2x)$$\n\nDoor orthogonaliteit: $c_2 = 1$ en $c_n = 0$ voor $n \\neq 2$.\n\n**Eindoplossing:**\n$$u(x,t) = \\sin(2x)\\, e^{-4t}$$"
+      }
+    ],
+    "machtreeks": [
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Machtreeks en afgeleiden correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Substitutie en groepering naar machten correct",
+            "points": 3
+          },
+          {
+            "label": "Recursierelatie correct afgeleid",
+            "points": 2
+          },
+          {
+            "label": "Vijf coëfficiënten correct berekend",
+            "points": 3
+          }
+        ],
+        "question": "## Machtreeks oplossing van GDV\n\nVind de eerste vijf termen van de machtreeksoplossing van de volgende differentiaalvergelijking:\n$$y'' - xy' - y = 0, \\quad y(0) = 1, \\quad y'(0) = 0$$",
+        "answer": "## Oplossing\n\nStel $y = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + \\cdots$\n\nAfgeleiden:\n$$y' = a_1 + 2a_2 x + 3a_3 x^2 + 4a_4 x^3 + \\cdots$$\n$$y'' = 2a_2 + 6a_3 x + 12a_4 x^2 + 20a_5 x^3 + \\cdots$$\n\nSubstitueer in $y'' - xy' - y = 0$ en groepeer naar machten van $x$:\n\n$$2a_2 + 6a_3 x + 12a_4 x^2 + \\cdots - x(a_1 + 2a_2 x + \\cdots) - (a_0 + a_1 x + a_2 x^2 + \\cdots) = 0$$\n\n- $x^0$: $2a_2 - a_0 = 0 \\Rightarrow a_2 = \\dfrac{a_0}{2}$\n- $x^1$: $6a_3 - a_1 - a_1 = 0 \\Rightarrow a_3 = \\dfrac{a_1}{3}$\n- $x^n$: $(n+2)(n+1)a_{n+2} - (n+1)a_n = 0 \\Rightarrow a_{n+2} = \\dfrac{a_n}{n+2}$\n\nMet $a_0 = 1$ en $a_1 = 0$:\n\n- $a_0 = 1$\n- $a_1 = 0$\n- $a_2 = \\dfrac{1}{2}$\n- $a_3 = 0$\n- $a_4 = \\dfrac{a_2}{4} = \\dfrac{1}{8}$\n\n$$\\boxed{y(x) = 1 + \\frac{1}{2}x^2 + \\frac{1}{8}x^4 + \\cdots}$$"
+      },
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Machtreeks en afgeleiden correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Substitutie en groepering naar machten correct",
+            "points": 3
+          },
+          {
+            "label": "Recursierelatie correct afgeleid",
+            "points": 2
+          },
+          {
+            "label": "Vijf coëfficiënten correct berekend",
+            "points": 3
+          }
+        ],
+        "question": "## Machtreeks oplossing van GDV\n\nVind de eerste vijf termen van de machtreeksoplossing van de volgende differentiaalvergelijking:\n$$y'' + xy' + y = 0, \\quad y(0) = 1, \\quad y'(0) = 0$$",
+        "answer": "## Oplossing\n\nStel $y = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + \\cdots$\n\nAfgeleiden:\n$$y' = a_1 + 2a_2 x + 3a_3 x^2 + 4a_4 x^3 + \\cdots$$\n$$y'' = 2a_2 + 6a_3 x + 12a_4 x^2 + 20a_5 x^3 + \\cdots$$\n\nSubstitueer in $y'' + xy' + y = 0$ en groepeer naar machten van $x$:\n\n$$2a_2 + 6a_3 x + 12a_4 x^2 + \\cdots + x(a_1 + 2a_2 x + \\cdots) + (a_0 + a_1 x + a_2 x^2 + \\cdots) = 0$$\n\n- $x^0$: $2a_2 + a_0 = 0 \\Rightarrow a_2 = -\\dfrac{a_0}{2}$\n- $x^1$: $6a_3 + a_1 + a_1 = 0 \\Rightarrow a_3 = -\\dfrac{a_1}{3}$\n- $x^n$: $(n+2)(n+1)a_{n+2} + (n+1)a_n = 0 \\Rightarrow a_{n+2} = -\\dfrac{a_n}{n+2}$\n\nMet $a_0 = 1$ en $a_1 = 0$:\n\n- $a_0 = 1$\n- $a_1 = 0$\n- $a_2 = -\\dfrac{1}{2}$\n- $a_3 = 0$\n- $a_4 = -\\dfrac{a_2}{4} = \\dfrac{1}{8}$\n\n$$\\boxed{y(x) = 1 - \\frac{1}{2}x^2 + \\frac{1}{8}x^4 + \\cdots}$$"
+      },
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Machtreeks en afgeleiden correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Substitutie en groepering naar machten correct",
+            "points": 3
+          },
+          {
+            "label": "Recursierelatie correct afgeleid",
+            "points": 2
+          },
+          {
+            "label": "Vijf coëfficiënten correct berekend",
+            "points": 3
+          }
+        ],
+        "question": "## Machtreeks oplossing van GDV\n\nVind de eerste vijf termen van de machtreeksoplossing van de volgende differentiaalvergelijking:\n$$y'' - 2xy' + 2y = 0, \\quad y(0) = 1, \\quad y'(0) = 0$$",
+        "answer": "## Oplossing\n\nStel $y = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + \\cdots$\n\nAfgeleiden:\n$$y' = a_1 + 2a_2 x + 3a_3 x^2 + 4a_4 x^3 + \\cdots$$\n$$y'' = 2a_2 + 6a_3 x + 12a_4 x^2 + 20a_5 x^3 + \\cdots$$\n\nSubstitueer in $y'' - 2xy' + 2y = 0$ en groepeer naar machten van $x$:\n\n$$2a_2 + 6a_3 x + 12a_4 x^2 + \\cdots - 2x(a_1 + 2a_2 x + \\cdots) + 2(a_0 + a_1 x + a_2 x^2 + \\cdots) = 0$$\n\n- $x^0$: $2a_2 + 2a_0 = 0 \\Rightarrow a_2 = -a_0$\n- $x^1$: $6a_3 + 0 = 0 \\Rightarrow a_3 = 0$\n- $x^n$: $(n+2)(n+1)a_{n+2} + (2-2n)a_n = 0 \\Rightarrow a_{n+2} = \\dfrac{2(n-1)}{(n+2)(n+1)} a_n$\n\nMet $a_0 = 1$ en $a_1 = 0$:\n\n- $a_0 = 1$\n- $a_1 = 0$\n- $a_2 = -1$\n- $a_3 = 0$\n- $a_4 = \\dfrac{2(1)}{4 \\cdot 3}(-1) = -\\dfrac{1}{6}$\n\n$$\\boxed{y(x) = 1 - x^2 - \\frac{1}{6}x^4 + \\cdots}$$"
+      },
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Machtreeks en afgeleiden correct opgesteld",
+            "points": 2
+          },
+          {
+            "label": "Substitutie en groepering naar machten correct",
+            "points": 3
+          },
+          {
+            "label": "Recursierelatie correct afgeleid",
+            "points": 2
+          },
+          {
+            "label": "Vijf coëfficiënten correct berekend",
+            "points": 3
+          }
+        ],
+        "question": "## Machtreeks oplossing van GDV\n\nVind de eerste vijf termen van de machtreeksoplossing van de volgende differentiaalvergelijking:\n$$(1-x)y'' - y' + y = 0, \\quad y(0) = 1, \\quad y'(0) = 1$$",
+        "answer": "## Oplossing\n\nStel $y = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + \\cdots$\n\nAfgeleiden:\n$$y' = a_1 + 2a_2 x + 3a_3 x^2 + 4a_4 x^3 + \\cdots$$\n$$y'' = 2a_2 + 6a_3 x + 12a_4 x^2 + 20a_5 x^3 + \\cdots$$\n\nSubstitueer in $(1-x)y'' - y' + y = 0$ en groepeer naar machten van $x$:\n\n$$(2a_2 - a_1 + a_0) + (6a_3 - 2a_2 - 2a_2 + a_1)x + (12a_4 - 6a_3 - 3a_3 + a_2)x^2 + \\cdots = 0$$\n\n- $x^0$: $2a_2 - a_1 + a_0 = 0 \\Rightarrow a_2 = \\dfrac{a_1 - a_0}{2}$\n- $x^1$: $6a_3 - 4a_2 + a_1 = 0 \\Rightarrow a_3 = \\dfrac{4a_2 - a_1}{6}$\n- $x^n$: $(n+2)(n+1)a_{n+2} = (2n+1)a_n \\Rightarrow a_{n+2} = \\dfrac{2n+1}{(n+2)(n+1)} a_n$\n\nMet $a_0 = 1$ en $a_1 = 1$:\n\n- $a_0 = 1$\n- $a_1 = 1$\n- $a_2 = \\dfrac{1-1}{2} = 0$\n- $a_3 = \\dfrac{4(0) - 1}{6} = -\\dfrac{1}{6}$\n- $a_4 = \\dfrac{5}{12} \\cdot 0 = 0$\n\n$$\\boxed{y(x) = 1 + x - \\frac{1}{6}x^3 + \\cdots}$$"
+      }
+    ],
+    "python_fft": [
+      {
+        "points": 7,
+        "criteria": [
+          {
+            "label": "Doel van FFT-berekening correct uitgelegd",
+            "points": 3
+          },
+          {
+            "label": "Frequentie-inhoud correct geïnterpreteerd",
+            "points": 4
+          }
+        ],
+        "question": "## Python FFT - Basisanalyse zonder loops\n\nGegeven is de volgende korte code:\n\n```python\nx = np.array([0, 1, 0, -1], dtype=float)\nX = np.fft.fft(x)\nmag = np.abs(X)\n```\n\n**(a)** Wat doet deze code stap voor stap? (3p)\n\n**(b)** Wat stelt `mag` voor en hoe gebruik je dit om dominante frequenties te herkennen? (4p)",
+        "answer": "## Oplossing\n\n**(a)**\n- `x` is het tijdsignaal.\n- `X = np.fft.fft(x)` zet het signaal om naar het frequentiedomein.\n- `mag = np.abs(X)` geeft de amplitudes per frequentiebin.\n\n**(b)**\n`mag` is de grootte van de complexe FFT-coëfficiënten.\n- Grote waarden in `mag` betekenen sterke aanwezigheid van die frequentie.\n- Kleine waarden betekenen zwakke of afwezige componenten.\n\nDus met `mag` kun je direct zien welke frequenties dominant zijn."
+      },
+      {
+        "points": 8,
+        "criteria": [
+          {
+            "label": "Low-pass principe correct uitgelegd",
+            "points": 3
+          },
+          {
+            "label": "Symmetrisch filteren correct onderbouwd",
+            "points": 5
+          }
+        ],
+        "question": "## Python FFT - Simpele low-pass zonder loops\n\nBeschouw deze code:\n\n```python\nX = np.fft.fft(signal)\nXf = X.copy()\nXf[10:-10] = 0\ny = np.fft.ifft(Xf).real\n```\n\n**(a)** Leg uit wat deze code doet. (3p)\n\n**(b)** Waarom is `Xf[10:-10] = 0` hier beter dan alleen `Xf[10:] = 0` bij reële signalen? (5p)",
+        "answer": "## Oplossing\n\n**(a)**\n- FFT van `signal` wordt berekend.\n- In `Xf` worden middenfrequenties onderdrukt.\n- Inverse FFT geeft het gefilterde tijdsignaal `y`.\n\nDit werkt als een eenvoudige low-pass benadering: lage frequenties blijven over.\n\n**(b)**\nBij reële signalen heeft het spectrum een geconjugeerde symmetrie.\n- `Xf[10:-10] = 0` bewaart die symmetrie beter.\n- Alleen `Xf[10:] = 0` maakt het spectrum asymmetrisch.\n- Asymmetrie kan leiden tot vervorming en complexe residuen na inverse FFT."
+      },
+      {
+        "points": 7,
+        "criteria": [
+          {
+            "label": "Convolutiestelling correct toegepast",
+            "points": 3
+          },
+          {
+            "label": "Betekenis van vermenigvuldiging in frequentiedomein correct",
+            "points": 4
+          }
+        ],
+        "question": "## Python FFT - Convolutie in enkele regels\n\nGegeven code:\n\n```python\nX1 = np.fft.fft(signal1, N)\nX2 = np.fft.fft(signal2, N)\nY = X1 * X2\ny = np.fft.ifft(Y).real\n```\n\n**(a)** Waarom geeft dit een convolutie van `signal1` en `signal2`? (3p)\n\n**(b)** Wat verandert er inhoudelijk als je `Y = X1 + X2` zou gebruiken? (4p)",
+        "answer": "## Oplossing\n\n**(a)**\nVolgens de convolutiestelling geldt:\n$$\\mathcal{F}\\{x_1 * x_2\\} = X_1(\\omega)X_2(\\omega)$$\nDaarom levert vermenigvuldigen in het frequentiedomein na inverse FFT de convolutie in het tijddomein.\n\n**(b)**\nBij `Y = X1 + X2` krijg je geen convolutie, maar superpositie:\n$$\\mathcal{F}^{-1}\\{X_1 + X_2\\} = x_1 + x_2$$\nDus het resultaat is optelling van signalen, niet filtering/convolutie."
+      },
+      {
+        "points": 7,
+        "criteria": [
+          {
+            "label": "Doel van windowing correct uitgelegd",
+            "points": 3
+          },
+          {
+            "label": "Effect op spectrum correct beschreven",
+            "points": 4
+          }
+        ],
+        "question": "## Python FFT - Windowing in enkele regels\n\nGegeven code:\n\n```python\nw = np.hanning(len(signal))\nxw = signal * w\nXw = np.fft.fft(xw)\n```\n\n**(a)** Waarom pas je hier een venster toe voor de FFT? (3p)\n\n**(b)** Welk praktisch effect heeft dit op het spectrum? (4p)",
+        "answer": "## Oplossing\n\n**(a)**\nHet venster maakt de signaalranden gladder. Daardoor worden sprongen aan begin/einde kleiner en neemt spectrale lekkage af.\n\n**(b)**\n- Zijlobben worden meestal lager.\n- Het spectrum wordt rustiger en beter interpreteerbaar.\n- De hoofdpiek wordt vaak iets breder (trade-off tussen lekkage en resolutie)."
+      },
+      {
+        "points": 9,
+        "criteria": [
+          {
+            "label": "Rol van zero-padding correct uitgelegd",
+            "points": 3
+          },
+          {
+            "label": "Keuze van FFT-lengte correct gemotiveerd",
+            "points": 3
+          },
+          {
+            "label": "Praktische gevolgen correct benoemd",
+            "points": 3
+          }
+        ],
+        "question": "## Python FFT - Zero-padding zonder loops\n\nGegeven code:\n\n```python\nN = 2048\nx_pad = np.pad(signal, (0, N - len(signal)))\nX = np.fft.fft(x_pad)\n```\n\n**(a)** Wat is het doel van zero-padding in deze code? (3p)\n\n**(b)** Waarom wordt vaak een FFT-lengte gekozen die een macht van 2 is? (3p)\n\n**(c)** Noem twee voordelen en één nadeel van deze aanpak. (3p)",
+        "answer": "## Oplossing\n\n**(a)**\nZero-padding verlengt het signaal met nullen zodat je FFT op lengte `N` kunt uitvoeren.\n\n**(b)**\nMachten van 2 zijn meestal sneller voor FFT-algoritmen, waardoor rekentijd daalt.\n\n**(c)**\nVoordelen:\n- Snellere berekening bij gunstige FFT-lengte.\n- Fijnere frequentiebemonstering in de weergave van het spectrum.\n\nNadeel:\n- Extra geheugenverbruik door de toegevoegde nullen."
+      }
+    ],
+    "conceptueel_dtft_dft_fft": [
+      {
+        "points": 8,
+        "criteria": [
+          {
+            "label": "Oorzaak van spectrale lekkage correct uitgelegd",
+            "points": 3
+          },
+          {
+            "label": "Effect op het spectrum correct beschreven",
+            "points": 2
+          },
+          {
+            "label": "Oplossingsmethoden correct genoemd en uitgelegd",
+            "points": 3
+          }
+        ],
+        "question": "## Conceptuele vragen DTFT/DFT/FFT - Spectrale lekkage\n\nBij FFT-analyse kan het spectrum vertekend raken door spectrale lekkage.\n\n**(a)** Leg in woorden uit waardoor spectrale lekkage ontstaat. (3p)\n\n**(b)** Hoe herken je spectrale lekkage in een spectrum? (2p)\n\n**(c)** Noem drie manieren om spectrale lekkage te beperken en leg kort uit waarom die helpen. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Spectrale lekkage ontstaat doordat je in de praktijk maar een eindig stuk van een signaal meet. Als dat stuk niet netjes aansluit aan het begin en einde, ontstaan sprongen. Die sprongen zorgen ervoor dat energie zich over meerdere frequenties verspreidt.\n\n**(b)** Je herkent het aan uitgesmeerde pieken: energie zit niet netjes in één frequentiebin maar verspreidt zich naar naburige bins. Ook kunnen extra zijlobben zichtbaar worden.\n\n**(c)** Drie manieren om lekkage te beperken:\n- **Vensterfunctie gebruiken**: maakt de randen zachter en vermindert sprongen.\n- **Langer meten**: geeft meestal een scherper spectrum en minder rand-effecten.\n- **Synchroon meten**: kies het meetvenster zo dat een geheel aantal perioden wordt gemeten, zodat begin en einde beter aansluiten."
+      },
+      {
+        "points": 9,
+        "criteria": [
+          {
+            "label": "Nyquist-Shannon criterium correct uitgelegd",
+            "points": 3
+          },
+          {
+            "label": "Aliasing mechanisme correct beschreven",
+            "points": 3
+          },
+          {
+            "label": "Practische implicaties en oplossingen benoemd",
+            "points": 3
+          }
+        ],
+        "question": "## Conceptuele vragen - Nyquist-criterium en aliasing\n\nBij digitale signaalverwerking is het Nyquist-criterium fundamenteel voor goede bemonstering.\n\n**(a)** Leg uit wat het Nyquist-criterium betekent en waarom het belangrijk is. (3p)\n\n**(b)** Beschrijf in woorden wat aliasing is en waarom het problematisch is. (3p)\n\n**(c)** Noem drie praktische manieren om aliasing te voorkomen. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Het Nyquist-criterium zegt dat je snel genoeg moet samplen om de hoogste relevante frequenties in een signaal correct vast te leggen. Anders gaat informatie verloren en ontstaat een foutieve frequentieweergave.\n\n**(b)** Aliasing betekent dat hoge frequenties in de digitale meting zichtbaar worden als lagere frequenties. Daardoor lijkt het alsof er andere frequentiecomponenten aanwezig zijn dan in het echte signaal. Dat is problematisch omdat deze fout achteraf meestal niet meer te herstellen is.\n\n**(c)** Drie praktische maatregelen:\n- **Een hogere samplefrequentie kiezen**: zo komt de Nyquist-grens hoger te liggen.\n- **Een anti-aliasing low-pass filter gebruiken**: verwijdert te hoge frequenties vóór digitalisering.\n- **Oversampling toepassen**: maakt het eenvoudiger om aliasing veilig te onderdrukken."
+      },
+      {
+        "points": 8,
+        "criteria": [
+          {
+            "label": "DFT vs DTFT verschillen correct uitgelegd",
+            "points": 3
+          },
+          {
+            "label": "Periodisatie effect correct beschreven",
+            "points": 2
+          },
+          {
+            "label": "Praktische implicaties correct benoemd",
+            "points": 3
+          }
+        ],
+        "question": "## Conceptuele verschillen tussen DTFT, DFT en FFT\n\nDTFT, DFT en FFT zijn nauw verwant, maar niet hetzelfde.\n\n**(a)** Leg het verschil uit tussen DTFT en DFT. (3p)\n\n**(b)** Wat betekent het dat de DFT een signaal impliciet als periodiek behandelt? (2p)\n\n**(c)** Leg uit wat de FFT is en hoe die zich verhoudt tot de DFT. (3p)",
+        "answer": "## Oplossing\n\n**(a)** De **DTFT** geeft een continue beschrijving van het spectrum van een discreet signaal. De **DFT** geeft alleen een eindig aantal frequentiewaarden en is daardoor geschikt voor numerieke berekening op een computer.\n\n**(b)** De DFT doet alsof het gemeten blok zich oneindig herhaalt. Daardoor kunnen randeffecten ontstaan als begin en einde niet goed op elkaar aansluiten.\n\n**(c)** De **FFT** is geen nieuwe transformatie, maar een snelle manier om de DFT uit te rekenen. Inhoudelijk geven DFT en FFT dus hetzelfde resultaat; de FFT doet het alleen efficiënter."
+      },
+      {
+        "points": 10,
+        "criteria": [
+          {
+            "label": "Spectrale lekkage mechanisme uitgelegd",
+            "points": 3
+          },
+          {
+            "label": "Vensterfuncties correct vergeleken",
+            "points": 4
+          },
+          {
+            "label": "Praktische keuze-criteria benoemd",
+            "points": 3
+          }
+        ],
+        "question": "## Vensterfuncties en spectrale lekkage\n\nVensterfuncties worden gebruikt om spectra beter interpreteerbaar te maken.\n\n**(a)** Leg uit waarom een vensterfunctie invloed heeft op spectrale lekkage. (3p)\n\n**(b)** Vergelijk de vensters Rectangular, Hamming, Blackman en Kaiser op hoofdlijnen. (4p)\n\n**(c)** Noem drie praktische overwegingen bij het kiezen van een vensterfunctie. (3p)",
+        "answer": "## Oplossing\n\n**(a)** Een vensterfunctie verandert vooral het gedrag aan de randen van het meetblok. Zachtere randen geven meestal minder lekkage, maar vaak ook minder scherpe frequentiescheiding.\n\n**(b)** Vergelijking op hoofdlijnen:\n- **Rectangular**: beste frequentieresolutie, maar meeste lekkage.\n- **Hamming**: goede algemene compromiskeuze.\n- **Blackman**: minder lekkage, maar bredere pieken.\n- **Kaiser**: flexibel venster; je kunt het gedrag afstemmen op de toepassing.\n\n**(c)** Drie praktische keuzes:\n- **Hoe belangrijk is frequentieresolutie?**\n- **Hoeveel lekkage of zijlobonderdrukking is nodig?**\n- **Is een standaardoplossing genoeg, of wil je het venster kunnen afstemmen?**"
+      }
+    ]
+  },
+  "REFERENCE": {
+    "taylor": "bereken Taylorreeksen door substitutie of differentiatie, dan term-voor-term integreren. Indien standaard reeksen bekend zijn kunnen deze direct gebruikt worden, anders afleiden via Taylor formule",
+    "fourier_normal": "Fourierreeksen van polynomen/stuksgewijze functies over symmetrische intervallen",
+    "fourier_complex": "Complexe Fourierreeksen, bereken c0 en cn, behandel discontinuïteiten",
+    "fourier_transform": "Directe berekening via definitie, splits integralen, gebruik complexe exponentialen",
+    "inverse_fourier": "Pas Fourier paren en regels toe (verschuiving, differentiatie) om f(t) te vinden zonder directe integratie",
+    "convolutie": "Convolutiestelling in frequentiedomein, partiaalbreuken voor inversie",
+    "filters": "Identificeer filtertype uit scenario, benoem het, motiveer keuze zonder H(omega) te geven",
+    "laplace": "Stuksgewijze Laplace via definitie, splits integralen, één partiële integratie",
+    "pde": "Pas Fourier/Laplace transformatie toe, los resulterende GDV op, inverteer",
+    "machtreeks": "Machtreeks y = a0 + a1*x + a2*x^2 + a3*x^3 + ..., leid recursie af, bereken coëfficiënten",
+    "python_fft": "Interpreteer numpy FFT code holistisch, leg het algemene doel uit, identificeer bugs en stel verbeteringen voor",
+    "conceptueel_dtft_dft_fft": "Conceptuele vragen over verschillen tussen transformaties, aliasing, spectrale lekkage en vensterfuncties"
+  }
+};

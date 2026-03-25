@@ -1,0 +1,558 @@
+{
+  "metadata": {
+    "title": "Wiskunde 2.3 - Fourier Transformaties Opgaven Blauwdruk",
+    "description": "Gestructureerde blauwdruk voor het genereren van wiskundige opgaven",
+    "created_date": "2026-03-23",
+    "total_topics": 12,
+    "purpose": "Sjabloon voor LLM-gebaseerde opgave generatie"
+  },
+  "topics": [
+    {
+      "id": "taylor",
+      "label": "Taylorreeksen",
+      "points": 15,
+      "difficulty": "gemiddeld",
+      "reference_style": "bereken Taylorreeksen door substitutie of differentiatie, dan term-voor-term integreren. Indien standaard reeksen bekend zijn kunnen deze direct gebruikt worden, anders afleiden via Taylor formule",
+      "required_skills": {
+        "calculus": ["differentiatie", "integratie", "reeksontwikkeling", "limieten"],
+        "algebra": ["substitutie", "patroonherkenning", "term_manipulatie"]
+      },
+      "common_functions": [
+        "sin(u)", "cos(u)", "e^u", "ln(1+u)", "1/(1+u)", "(1+u)^n"
+      ],
+      "typical_substitutions": [
+        "u = x^2", "u = -x", "u = -x^2", "u = 2x"
+      ],
+      "exercise_patterns": [
+        {
+          "pattern_type": "substitutie_gebaseerd",
+          "structure": "Gegeven functie f(x) met bekend reekspatroon",
+          "steps": [
+            "Schrijf bekende Taylorreeks voor basisfunctie op (indien bekend) of leid af",
+            "Pas substitutie u = g(x) toe",
+            "Breek af bij opgegeven macht",
+            "Optioneel: integreer term voor term"
+          ],
+          "point_distribution": {
+            "bekende_reeks": 3,
+            "substitutie": 4,
+            "afbreking": 3,
+            "integratie": 5
+          },
+          "examples": ["sin(x^2)", "cos(x^2)", "e^(-x^2)", "ln(1+x^2)"],
+          "instruction_note": "Studenten mogen bekende standaard reeksen direct gebruiken indien deze bekend zijn, anders afleiden via Taylor formule",
+          "solution_note": "In uitwerkingen moet altijd vermeld worden dat als studenten de gebruikte standaard reeks niet kennen, ze deze kunnen afleiden via herhaalde differentiatie en de Taylor formule"
+        },
+        {
+          "pattern_type": "differentiatie_gebaseerd",
+          "structure": "Functies die herhaalde differentiatie vereisen",
+          "steps": [
+            "Bereken afgeleiden f', f'', f''', f''''",
+            "Evalueer in x = 0",
+            "Pas Taylor formule toe",
+            "Optioneel: integreer"
+          ],
+          "point_distribution": {
+            "afgeleiden": 4,
+            "evaluatie": 3,
+            "formule_toepassing": 3,
+            "integratie": 5
+          },
+          "examples": ["sqrt(1+x^2)", "1/sqrt(1+x^2)"]
+        }
+      ]
+    },
+    {
+      "id": "fourier_normal",
+      "label": "Gewone Fourierreeks",
+      "points": 14,
+      "difficulty": "gemiddeld",
+      "reference_style": "Fourierreeksen van polynomen/stuksgewijze functies over symmetrische intervallen",
+      "required_skills": {
+        "calculus": ["integratie", "partiële_integratie", "bepaalde_integralen"],
+        "algebra": ["symmetrie_analyse", "stuksgewijze_functies", "goniometrische_identiteiten"]
+      },
+      "standard_intervals": ["[-π, π]", "[-1, 1]", "[-2, 2]", "[0, 2π]"],
+      "exercise_patterns": [
+        {
+          "pattern_type": "even_oneven_analyse",
+          "structure": "Bepaal functiesymmetrie en bereken coëfficiënten",
+          "steps": [
+            "Controleer of functie even, oneven of geen van beide is",
+            "Bepaal welke coëfficiënten nul zijn",
+            "Bereken a₀ (constante term)",
+            "Bereken niet-nul coëfficiënten met integratie",
+            "Schrijf volledige Fourierreeks op"
+          ],
+          "point_distribution": {
+            "symmetrie_analyse": 2,
+            "constante_term": 3,
+            "coëfficiënt_berekening": 6,
+            "reeks_opschrijven": 2,
+            "integratie_techniek": 1
+          },
+          "function_types": ["polynomen", "absolute_waarde", "stuksgewijs_lineair", "exponentiaal"]
+        }
+      ]
+    },
+    {
+      "id": "fourier_complex",
+      "label": "Complexe Fourierreeks",
+      "points": 14,
+      "difficulty": "gevorderd",
+      "reference_style": "Complexe Fourierreeksen, bereken c0 en cn, behandel discontinuïteiten",
+      "required_skills": {
+        "calculus": ["complexe_integratie", "bepaalde_integralen"],
+        "algebra": ["complexe_getallen", "exponentiële_identiteiten", "symmetrie_relaties"]
+      },
+      "key_relations": [
+        "e^(±iπn) = (-1)^n",
+        "e^(±2πin) = 1",
+        "c_{-n} = c_n* voor reële functies"
+      ],
+      "exercise_patterns": [
+        {
+          "pattern_type": "complexe_coëfficiënt_berekening",
+          "structure": "Bereken c₀ en c_n met complexe exponentialen",
+          "steps": [
+            "Bepaal functiesymmetrie",
+            "Bereken c₀ met integratie",
+            "Stel integraal voor c_n op",
+            "Gebruik complexe exponentiële identiteiten",
+            "Schrijf volledige complexe Fourierreeks op"
+          ],
+          "point_distribution": {
+            "symmetrie_controle": 2,
+            "c0_berekening": 3,
+            "integraal_opstelling": 3,
+            "exponentiële_identiteiten": 2,
+            "coëfficiënt_resultaat": 2,
+            "reeks_opschrijven": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "fourier_transform",
+      "label": "Fouriertransformatie",
+      "points": 16,
+      "difficulty": "gevorderd", 
+      "reference_style": "Directe berekening via definitie, splits integralen, gebruik complexe exponentialen",
+      "required_skills": {
+        "calculus": ["complexe_integratie", "oneigenlijke_integralen", "partiële_integratie"],
+        "algebra": ["complexe_exponentialen", "goniometrische_substitutie", "limiet_evaluatie"]
+      },
+      "common_functions": [
+        "e^(-|t|)", "e^(-at)u(t)", "rechthoekpuls", "driehoekpuls", 
+        "e^(-t²)", "t·e^(-|t|)", "cos(t)·puls"
+      ],
+      "exercise_patterns": [
+        {
+          "pattern_type": "directe_berekening",
+          "structure": "Pas Fouriertransformatie definitie toe en evalueer",
+          "steps": [
+            "Stel Fourier integraal op",
+            "Splits integraal bij discontinuïteiten",
+            "Evalueer elk deel afzonderlijk",
+            "Combineer resultaten en vereenvoudig",
+            "Geef fysische interpretatie"
+          ],
+          "point_distribution": {
+            "integraal_opstelling": 3,
+            "splitsen_berekening": 6,
+            "resultaat_combinatie": 3,
+            "fysische_interpretatie": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "inverse_fourier",
+      "label": "Inverse Fouriertransformatie",
+      "points": 7,
+      "difficulty": "gemiddeld",
+      "reference_style": "Pas Fourier paren en regels toe (verschuiving, differentiatie) om f(t) te vinden zonder directe integratie",
+      "required_skills": {
+        "algebra": ["patroon_herkenning", "fourier_paar_opzoeken", "regel_toepassing"],
+        "calculus": ["transformatie_eigenschappen"]
+      },
+      "standard_pairs": [
+        "e^(-a|t|) ↔ 2a/(a²+ω²)",
+        "e^(-at)u(t) ↔ 1/(a+iω)",
+        "t^n·e^(-at)u(t) ↔ n!/(a+iω)^(n+1)"
+      ],
+      "transform_rules": [
+        "tijd_verschuiving", "frequentie_verschuiving", "differentiatie", "schaling"
+      ],
+      "exercise_patterns": [
+        {
+          "pattern_type": "paar_herkenning",
+          "structure": "Identificeer standaard paar en pas transformatie regels toe",
+          "steps": [
+            "Herken basis Fourier paar",
+            "Identificeer benodigde transformatieregel",
+            "Pas regel systematisch toe", 
+            "Schrijf eindresultaat in tijddomein op"
+          ],
+          "point_distribution": {
+            "paar_identificatie": 2,
+            "regel_toepassing": 3,
+            "eind_resultaat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "convolutie",
+      "label": "Convolutie", 
+      "points": 9,
+      "difficulty": "gemiddeld",
+      "reference_style": "Convolutiestelling in frequentiedomein, partiaalbreuken voor inversie",
+      "required_skills": {
+        "calculus": ["convolutie_integralen", "laplace_inversie"],
+        "algebra": ["partiaalbreuken", "polynoom_deling", "fourier_paren"]
+      },
+      "convolution_theorem": "F{f*g} = F{f}·F{g}",
+      "exercise_patterns": [
+        {
+          "pattern_type": "frequentiedomein_convolutie",
+          "structure": "Gebruik convolutiestelling om directe integratie te vermijden",
+          "steps": [
+            "Schrijf convolutie integraal op", 
+            "Transformeer beide functies naar frequentiedomein",
+            "Vermenigvuldig transformaties",
+            "Ontbind in partiaalbreuken indien nodig",
+            "Pas inverse transformatie toe"
+          ],
+          "point_distribution": {
+            "convolutie_opstelling": 2,
+            "frequentie_transformaties": 2,
+            "product_berekening": 2,
+            "partiaalbreuken": 2,
+            "inverse_transformatie": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "filters",
+      "label": "Filters",
+      "points": 5,
+      "difficulty": "basis",
+      "reference_style": "Identificeer filtertype uit scenario, benoem het, motiveer keuze zonder H(omega) te geven",
+      "required_skills": {
+        "signal_processing": ["frequentie_analyse", "filter_classificatie"],
+        "reasoning": ["probleem_analyse", "oplossing_rechtvaardiging"]
+      },
+      "filter_types": [
+        "laagdoorlaat", "hoogdoorlaat", "banddoorlaat", "bandstop", "notch"
+      ],
+      "applications": [
+        "audio_verwerking", "biomedische_signalen", "communicatie", "seismologie", "ruis_verwijdering"
+      ],
+      "exercise_patterns": [
+        {
+          "pattern_type": "filter_selectie",
+          "structure": "Gegeven praktisch scenario, selecteer geschikt filter",
+          "steps": [
+            "Analyseer frequentie-inhoud van signaal en interferentie",
+            "Bepaal gewenste frequentierespons",
+            "Benoem geschikt filtertype",
+            "Motiveer waarom andere filtertypes ongeschikt zijn"
+          ],
+          "point_distribution": {
+            "filter_identificatie": 2,
+            "rechtvaardiging_tegen_alternatieven": 2,
+            "conclusie": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "laplace",
+      "label": "Laplacetransformatie",
+      "points": 16,
+      "difficulty": "gevorderd",
+      "reference_style": "Stuksgewijze Laplace via definitie, splits integralen, één partiële integratie",
+      "required_skills": {
+        "calculus": ["complexe_integratie", "partiële_integratie", "oneigenlijke_integralen"],
+        "algebra": ["complexe_exponentialen", "substitutie_technieken"]
+      },
+      "common_functions": [
+        "stuksgewijze_stap", "stuksgewijze_exponentiaal", "gevensterde_sinusvormen", "vertraagde_functies"
+      ],
+      "integration_techniques": [
+        "partiële_integratie", "substitutie", "partiaalbreuken"
+      ],
+      "exercise_patterns": [
+        {
+          "pattern_type": "stuksgewijze_laplace",
+          "structure": "Transformeer stuksgewijze functies met definitie",
+          "steps": [
+            "Stel Laplace integraal op met juiste grenzen",
+            "Splits integraal bij discontinuïteiten",
+            "Gebruik geschikte integratietechniek",
+            "Evalueer en combineer resultaten",
+            "Geef convergentiegebied aan"
+          ],
+          "point_distribution": {
+            "integraal_opstelling": 3,
+            "integratie_techniek": 6,
+            "resultaat_evaluatie": 4,
+            "convergentie": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "pde",
+      "label": "PDV's oplossen",
+      "points": 10,
+      "difficulty": "gevorderd",
+      "reference_style": "Pas Fourier/Laplace transformatie toe, los resulterende GDV op, inverteer",
+      "required_skills": {
+        "calculus": ["partiële_afgeleiden", "fourier_transformaties", "laplace_transformaties"],
+        "differential_equations": ["gdv_oplossen", "beginvoorwaarden", "randvoorwaarden"]
+      },
+      "pde_types": [
+        "warmtevergelijking", "golfvergelijking", "gedempte_oscillator"
+      ],
+      "solution_method": "transformeer → los_gdv_op → inverteer",
+      "exercise_patterns": [
+        {
+          "pattern_type": "transformatie_methode",
+          "structure": "Gebruik transformaties om PDV te reduceren tot GDV",
+          "steps": [
+            "Pas geschikte transformatie toe (Fourier/Laplace)",
+            "Gebruik transformatie regels voor afgeleiden", 
+            "Los resulterende GDV op in transformatiedomein",
+            "Pas begin-/randvoorwaarden toe",
+            "Inverteer transformatie voor oplossing"
+          ],
+          "point_distribution": {
+            "transformatie_toepassing": 2,
+            "afgeleide_regels": 2,
+            "gdv_oplossing": 2,
+            "randvoorwaarden": 2,
+            "inversie": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "machtreeks",
+      "label": "Machtreeksen / GDV", 
+      "points": 10,
+      "difficulty": "gemiddeld",
+      "reference_style": "Machtreeks y=som c_n x^n, leid recursie af, bereken coëfficiënten",
+      "required_skills": {
+        "calculus": ["reeks_ontwikkeling", "term_voor_term_differentiatie"],
+        "algebra": ["recursie_relaties", "coëfficiënt_vergelijking", "patroon_herkenning"]
+      },
+      "standard_form": "y = Σ(n=0 tot ∞) a_n x^n",
+      "solution_method": "ansatz → substitueer → groepeer → recursie → los_op",
+      "exercise_patterns": [
+        {
+          "pattern_type": "machtreeks_gdv",
+          "structure": "Los GDV op met machtreeks ontwikkeling",
+          "steps": [
+            "Stel machtreeks ansatz op y = Σa_n x^n",
+            "Bereken afgeleiden term voor term",
+            "Substitueer in differentiaalvergelijking",
+            "Groepeer naar machten van x",
+            "Leid recursierelaties af",
+            "Pas beginvoorwaarden toe",
+            "Bereken eerste paar coëfficiënten"
+          ],
+          "point_distribution": {
+            "ansatz_opstelling": 2,
+            "substitutie": 2,
+            "groepering": 2, 
+            "recursie": 2,
+            "coëfficiënten": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "python_fft",
+      "label": "Python & FFT",
+      "points": 7,
+      "difficulty": "basis",
+      "reference_style": "Interpreteer numpy FFT code holistisch, leg het algemene doel uit, identificeer bugs en stel verbeteringen voor",
+      "required_skills": {
+        "programming": ["numpy", "fft_functies", "array_operaties"],
+        "signal_processing": ["fft_theorie", "vensteringen", "frequentiedomein"]
+      },
+      "numpy_functions": [
+        "np.fft.fft", "np.fft.ifft", "np.fft.fftfreq", 
+        "np.hanning", "np.hamming", "np.bartlett",
+        "np.convolve"
+      ],
+      "common_mistakes": [
+        "verkeerde_domein_operaties", "incorrecte_venstering", "ontbrekende_abs", 
+        "convolutie_vs_correlatie", "fase_informatie_verlies"
+      ],
+      "exercise_patterns": [
+        {
+          "pattern_type": "code_analyse",
+          "structure": "Analyseer Python FFT code voor fouten en doel",
+          "steps": [
+            "Begrijp code intentie",
+            "Identificeer domein conflicten",
+            "Spot algorithmische fouten",
+            "Geef gecorrigeerde versie",
+            "Leg uit waarom correctie nodig is"
+          ],
+          "point_distribution": {
+            "doel_uitleg": 2,
+            "fout_identificatie": 3,
+            "correctie": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "conceptueel_dtft_dft_fft",
+      "label": "Conceptuele vragen DTFT/DFT/FFT",
+      "points": 8,
+      "difficulty": "gemiddeld",
+      "reference_style": "Conceptuele vragen over verschillen tussen transformaties, aliasing, spectrale lekkage en vensterfuncties",
+      "required_skills": {
+        "signal_processing": ["sampeling_theorie", "aliasing_begrip", "spectrale_analyse", "venstering"],
+        "theory": ["nyquist_criterium", "lekkage_oorzaken", "venster_eigenschappen"]
+      },
+      "key_concepts": {
+        "transforms": {
+          "DTFT": "Discrete Time Fourier Transform - continue frequentie, discrete tijd",
+          "DFT": "Discrete Fourier Transform - discrete frequentie, discrete tijd",
+          "FFT": "Fast Fourier Transform - efficiënte implementatie van DFT"
+        },
+        "aliasing": {
+          "oorzaak": "Onvoldoende bemonstering volgens Nyquist criterium",
+          "preventie": ["anti-aliasing filter", "hogere bemonsteringsfrequentie", "oversampling"]
+        },
+        "spectral_leakage": {
+          "oorzaak": "Eindige waarnemingsvenster, niet-geheel aantal perioden",
+          "preventie": ["vensterfuncties", "zero-padding", "langere waarneming"]
+        },
+        "window_functions": {
+          "types": ["Hanning", "Hamming", "Blackman", "Kaiser", "Rectangular"],
+          "application_order": "venstering → FFT → spectrale analyse",
+          "trade_offs": "spectrale resolutie vs zijlob onderdrukking"
+        }
+      },
+      "exercise_patterns": [
+        {
+          "pattern_type": "conceptuele_vergelijking",
+          "structure": "Vergelijk eigenschappen van verschillende transformaties",
+          "steps": [
+            "Beschrijf fundamentele verschillen tussen DTFT, DFT, FFT",
+            "Leg voor- en nadelen van elke methode uit",
+            "Geef praktische toepassingen"
+          ],
+          "point_distribution": {
+            "verschillen_uitleg": 3,
+            "voor_nadelen": 2,
+            "praktische_toepassingen": 1
+          }
+        },
+        {
+          "pattern_type": "aliasing_analyse",
+          "structure": "Analyseer aliasing fenomeen en preventie",
+          "steps": [
+            "Leg oorzaak van aliasing uit",
+            "Beschrijf Nyquist criterium",
+            "Noem preventieve maatregelen"
+          ],
+          "point_distribution": {
+            "oorzaak_uitleg": 2,
+            "nyquist_criterium": 2,
+            "preventie_maatregelen": 2
+          }
+        },
+        {
+          "pattern_type": "spectrale_lekkage_analyse",
+          "structure": "Analyseer spectrale lekkage en oplossingen",
+          "steps": [
+            "Leg oorzaak van spectrale lekkage uit",
+            "Beschrijf effect op spectrum",
+            "Noem oplossingsmethoden"
+          ],
+          "point_distribution": {
+            "oorzaak_uitleg": 3,
+            "effect_beschrijving": 2,
+            "oplossingen": 3
+          }
+        },
+        {
+          "pattern_type": "vensterfunctie_analyse",
+          "structure": "Analyseer vensterfuncties en toepassing",
+          "steps": [
+            "Beschrijf doel van vensterfuncties",
+            "Vergelijk verschillende venstertypen",
+            "Leg juiste volgorde van toepassing uit"
+          ],
+          "point_distribution": {
+            "doel_beschrijving": 2,
+            "venster_vergelijking": 3,
+            "toepassing_volgorde": 3
+          }
+        }
+      ]
+    }
+  ],
+  "general_patterns": {
+    "difficulty_progression": [
+      {
+        "level": "basis",
+        "characteristics": ["directe_toepassing", "standaard_formulas", "minimale_algebra"],
+        "topics": ["filters", "python_fft", "conceptueel_dtft_dft_fft"]
+      },
+      {
+        "level": "gemiddeld", 
+        "characteristics": ["meerstappen_proces", "integratie_vereist", "patroon_herkenning"],
+        "topics": ["taylor", "fourier_normal", "inverse_fourier", "convolutie", "machtreeks"]
+      },
+      {
+        "level": "gevorderd",
+        "characteristics": ["complexe_analyse", "meerdere_technieken", "fysische_interpretatie"],
+        "topics": ["fourier_complex", "fourier_transform", "laplace", "pde"]
+      }
+    ],
+    "common_assessment_criteria": [
+      "correcte_formule_identificatie",
+      "juiste_wiskundige_techniek",
+      "nauwkeurige_berekening", 
+      "geschikte_eindvorm",
+      "fysische_interpretatie_indien_van_toepassing"
+    ],
+    "mathematical_notation": {
+      "inline": "$...$",
+      "display": "$$...$$",
+      "functions": ["sin", "cos", "exp", "ln", "sqrt"],
+      "operators": ["frac", "int", "sum", "lim"],
+      "symbols": ["pi", "omega", "alpha", "beta", "gamma", "delta"]
+    }
+  },
+  "generation_guidelines": {
+    "maintain_difficulty_level": "Houd oefeningen binnen het gespecificeerde moeilijkheidsbereik voor elk onderwerp",
+    "preserve_point_distribution": "Behoud vergelijkbare puntenverdeling over vraagonderdelen",
+    "ensure_solvability": "Alle gegenereerde oefeningen moeten duidelijke, stap-voor-stap oplossingen hebben",
+    "avoid_repetition": "Genereer variaties die dezelfde concepten testen met verschillende parameters",
+    "include_criteria": "Geef gedetailleerde beoordelingscriteria voor complexe vragen",
+    "language": "Genereer alle inhoud in het Nederlands",
+    "format": "Gebruik consistente wiskundige notatie en vraagstructuur",
+    "mathematical_formatting": {
+      "latex_formulas": "Alle wiskundige formules in uitwerkingen moeten tussen $$...$$ staan voor correcte display formatting",
+      "code_formatting": "Python/FFT code fragmenten moeten tussen backticks `...` staan voor betere leesbaarheid en syntax highlighting"
+    },
+    "solution_quality": {
+      "detailed_steps": "Uitwerkingen moeten duidelijk genoeg zijn met duidelijke stappen - niet alleen het antwoord geven",
+      "no_explicit_numbering": "Vermijd expliciete 'Stap 1..., Stap 2...' nummering in uitwerkingen",
+      "point_driven_detail": "De haalbare punten per criteria moeten leidend zijn voor welke stappen in ieder geval in de uitwerking moeten terugkomen",
+      "comprehensive_explanation": "Elke stap moet voldoende uitleg hebben zodat de student het kan volgen en begrijpen",
+      "taylor_specific": "Voor Taylor-opgaven: vermeld altijd in de uitwerking dat indien studenten de gebruikte standaard reeks niet kennen, ze deze kunnen afleiden via herhaalde differentiatie en de Taylor formule"
+    }
+  }
+}

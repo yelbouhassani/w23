@@ -1,0 +1,68 @@
+{
+  "structure_template": {
+    "TOPICS": [
+      {
+        "id": "topic_identifier",
+        "label": "Nederlandse Topic Naam",
+        "points": "number"
+      }
+    ],
+    "PREDEFINED": {
+      "topic_identifier": [
+        {
+          "points": "number (totaal punten voor deze oefening)",
+          "criteria": [
+            {
+              "label": "Beoordelingscriterium beschrijving",
+              "points": "number (punten voor dit criterium)"
+            }
+          ],
+          "question": "String.raw template met LaTeX: ## Titel\n\nContext\n\n**(a)** Vraag deel (Xp)\n**(b)** Vraag deel (Xp)",
+          "answer": "String.raw template met LaTeX: ## Oplossing\n\n**(a)** Antwoord met $$formules$$\n\n**(b)** Antwoord deel 2"
+        }
+      ]
+    },
+    "REFERENCE": {
+      "topic_identifier": "Reference style description in English"
+    }
+  },
+  "formatting_rules": {
+    "latex": {
+      "inline": "$...$",
+      "display": "$$...$$",
+      "template": "String.raw voor correcte escape handling"
+    },
+    "code": {
+      "python_fft": "<pre>code hier</pre>",
+      "regular": "`code`"
+    },
+    "structure": {
+      "question_title": "## Titel",
+      "parts": "**(a)** Deel 1 (Xp)",
+      "answer_title": "## Oplossing",
+      "answer_parts": "**(a)** Uitwerking"
+    }
+  },
+  "current_topics": [
+    "taylor",
+    "fourier_normal", 
+    "fourier_complex",
+    "fourier_transform",
+    "inverse_fourier",
+    "convolutie",
+    "filters",
+    "laplace",
+    "pde",
+    "machtreeks",
+    "python_fft"
+  ],
+  "validation_checklist": [
+    "Topic IDs komen overeen tussen TOPICS en PREDEFINED",
+    "Criteria punten tellen op naar totaal points",
+    "String.raw gebruikt voor LaTeX content",
+    "Nederlandse taal in questions/answers",
+    "Proper LaTeX formatting $$...$$",
+    "Python code in <pre> tags voor python_fft",
+    "Structured vraag delen met (Xp) notatie"
+  ]
+}
